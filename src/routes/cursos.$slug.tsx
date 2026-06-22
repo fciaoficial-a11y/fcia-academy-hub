@@ -151,6 +151,9 @@ function CourseDetail() {
           })}
         </div>
       </Section>
+
+      <Testimonials />
+      <FAQ />
     </>
   );
 }
