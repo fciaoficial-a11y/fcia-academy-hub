@@ -12,11 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TurmasRouteImport } from './routes/turmas'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as InscricaoRouteImport } from './routes/inscricao'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as CursosRouteImport } from './routes/cursos'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CursosSlugRouteImport } from './routes/cursos.$slug'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
 const TurmasRoute = TurmasRouteImport.update({
   id: '/turmas',
@@ -33,9 +39,29 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InscricaoRoute = InscricaoRouteImport.update({
   id: '/inscricao',
   path: '/inscricao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmpresasRoute = EmpresasRouteImport.update({
@@ -48,6 +74,10 @@ const CursosRoute = CursosRouteImport.update({
   path: '/cursos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -58,36 +88,57 @@ const CursosSlugRoute = CursosSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => CursosRoute,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cursos': typeof CursosRouteWithChildren
   '/empresas': typeof EmpresasRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/inscricao': typeof InscricaoRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cursos': typeof CursosRouteWithChildren
   '/empresas': typeof EmpresasRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/inscricao': typeof InscricaoRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/cursos': typeof CursosRouteWithChildren
   '/empresas': typeof EmpresasRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/inscricao': typeof InscricaoRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRouteTypes {
@@ -96,38 +147,59 @@ export interface FileRouteTypes {
     | '/'
     | '/cursos'
     | '/empresas'
+    | '/forgot-password'
     | '/inscricao'
+    | '/login'
+    | '/register'
+    | '/reset-password'
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/dashboard'
     | '/cursos/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cursos'
     | '/empresas'
+    | '/forgot-password'
     | '/inscricao'
+    | '/login'
+    | '/register'
+    | '/reset-password'
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/dashboard'
     | '/cursos/$slug'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/cursos'
     | '/empresas'
+    | '/forgot-password'
     | '/inscricao'
+    | '/login'
+    | '/register'
+    | '/reset-password'
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/_authenticated/dashboard'
     | '/cursos/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   CursosRoute: typeof CursosRouteWithChildren
   EmpresasRoute: typeof EmpresasRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   InscricaoRoute: typeof InscricaoRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SettingsRoute: typeof SettingsRoute
   TrilhasRoute: typeof TrilhasRoute
   TurmasRoute: typeof TurmasRoute
@@ -156,11 +228,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inscricao': {
       id: '/inscricao'
       path: '/inscricao'
       fullPath: '/inscricao'
       preLoaderRoute: typeof InscricaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/empresas': {
@@ -177,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CursosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -191,8 +298,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CursosSlugRouteImport
       parentRoute: typeof CursosRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface CursosRouteChildren {
   CursosSlugRoute: typeof CursosSlugRoute
@@ -207,9 +332,14 @@ const CursosRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   CursosRoute: CursosRouteWithChildren,
   EmpresasRoute: EmpresasRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   InscricaoRoute: InscricaoRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SettingsRoute: SettingsRoute,
   TrilhasRoute: TrilhasRoute,
   TurmasRoute: TurmasRoute,
