@@ -203,7 +203,12 @@ function CourseLearnPage() {
             )}
           </Button>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="secondary" className="rounded-full">
+              <Link to="/quiz/$moduleId" params={{ moduleId: activeModule.id }}>
+                Fazer quiz
+              </Link>
+            </Button>
             <Button
               variant="outline"
               className="rounded-full"
