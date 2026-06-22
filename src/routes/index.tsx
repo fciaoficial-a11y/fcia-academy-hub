@@ -4,7 +4,6 @@ import {
   Bot,
   Building2,
   CheckCircle2,
-  Code2,
   Compass,
   GraduationCap,
   LineChart,
