@@ -1,6 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import {
-  Activity,
   ArrowUpRight,
   Award,
   Brain,
@@ -8,7 +7,6 @@ import {
   Flame,
   Play,
   Sparkles,
-  Star,
   Trophy,
   Zap,
   Bot,
@@ -99,17 +97,17 @@ function SecondaryCTA({
 
 // ---------------- Data ----------------
 const heroStats = [
-  { value: "94%", label: "Satisfação dos alunos" },
-  { value: "+300h", label: "Conteúdo planejado" },
-  { value: "6", label: "Trilhas de aprendizado" },
-  { value: "100%", label: "Certificação automática" },
+  { value: "6", label: "Trilhas" },
+  { value: "18", label: "Cursos" },
+  { value: "72", label: "Módulos" },
+  { value: "100%", label: "Certificados verificáveis" },
 ];
 
 const socialProof = [
-  { value: "94%", label: "Satisfação dos alunos", icon: Star },
-  { value: "4.9", label: "Avaliação média", icon: Trophy },
-  { value: "+300h", label: "Conteúdo on-demand", icon: Play },
-  { value: "24/7", label: "Comunidade ativa", icon: Activity },
+  { value: "6", label: "Trilhas de aprendizado", icon: Layers },
+  { value: "18", label: "Cursos práticos", icon: Play },
+  { value: "72", label: "Módulos aplicados", icon: Workflow },
+  { value: "100%", label: "Certificados verificáveis", icon: Award },
 ];
 
 const urgencyPoints = [
@@ -119,19 +117,31 @@ const urgencyPoints = [
 ];
 
 // Benefit-oriented descriptions per track (home only)
-const trackBenefits: Record<string, string> = {
-  "ia-aplicada":
-    "Automatize tarefas, aumente produtividade e economize horas por semana.",
-  "dev-moderno":
-    "Construa aplicações e soluções reais utilizando tecnologias atuais.",
-  empreendedorismo:
-    "Use IA para criar produtos, serviços e novas fontes de receita.",
-  "profissional-futuro":
-    "Desenvolva competências cada vez mais valorizadas pelo mercado.",
-  inovacao:
-    "Aprenda a identificar oportunidades e criar vantagem competitiva.",
-  "renda-freelance":
-    "Transforme conhecimento em serviços, projetos e oportunidades de renda.",
+const trackBenefits: Record<string, { desc: string; outcome: string }> = {
+  "ia-aplicada": {
+    desc: "Automatize tarefas repetitivas, aumente sua produtividade e economize horas de trabalho por semana com inteligência artificial.",
+    outcome: "Você sai aplicando IA no seu dia a dia profissional.",
+  },
+  "dev-moderno": {
+    desc: "Construa aplicações, APIs e produtos digitais reais com as tecnologias mais usadas pelo mercado hoje.",
+    outcome: "Você sai capaz de entregar projetos completos.",
+  },
+  empreendedorismo: {
+    desc: "Use IA e automação para criar produtos, serviços e novas fontes de receita escaláveis.",
+    outcome: "Você sai com um modelo de negócio validado.",
+  },
+  "profissional-futuro": {
+    desc: "Desenvolva as competências comportamentais e técnicas mais valorizadas pelas empresas dos próximos 10 anos.",
+    outcome: "Você sai pronto para liderar a transformação.",
+  },
+  inovacao: {
+    desc: "Aprenda a identificar oportunidades, aplicar novas tecnologias e criar vantagem competitiva real no seu setor.",
+    outcome: "Você sai pensando como agente de inovação.",
+  },
+  "renda-freelance": {
+    desc: "Transforme conhecimento em serviços, projetos freelance e novas oportunidades de renda recorrente.",
+    outcome: "Você sai com um caminho prático para monetizar.",
+  },
 };
 
 const capabilities: { icon: LucideIcon; label: string }[] = [
@@ -188,15 +198,15 @@ function Index() {
                 Plataforma de IA · Tecnologia · Automação
               </div>
 
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.25rem]">
+              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.75rem]">
                 Domine <span className="text-gradient">IA</span> antes
                 <br />que ela transforme
                 <br />seu mercado.
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-xl text-xl leading-relaxed text-foreground/85">
                 Aprenda a criar automações, agentes inteligentes, conteúdo e soluções digitais
-                que geram resultados reais para profissionais e empresas.
+                que geram <span className="text-foreground font-medium">resultados reais</span> para profissionais e empresas.
               </p>
 
               {/* Urgency */}
@@ -217,8 +227,8 @@ function Index() {
                 })}
               </ul>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <PrimaryCTA to="/inscricao" className="h-14 px-9 text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
                 <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
               </div>
 
@@ -237,7 +247,7 @@ function Index() {
             </div>
 
             {/* Premium platform mockup — 30% larger, stronger contrast */}
-            <div className="relative animate-fade-up lg:scale-[1.08] lg:origin-left" style={{ animationDelay: "0.2s" }}>
+            <div className="relative animate-fade-up lg:scale-[0.97] lg:origin-left" style={{ animationDelay: "0.2s" }}>
               <div
                 className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-primary/45 via-accent/30 to-transparent blur-3xl"
                 aria-hidden
@@ -370,22 +380,24 @@ function Index() {
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
-                const benefit = trackBenefits[t.slug] ?? t.desc;
+                const benefit = trackBenefits[t.slug];
+                const desc = benefit?.desc ?? t.desc;
+                const outcome = benefit?.outcome;
                 return (
                   <Link
                     key={t.slug}
                     to="/cursos/$slug"
                     params={{ slug: t.slug }}
-                    className="group relative w-[280px] shrink-0 lg:w-auto"
+                    className="group relative w-[320px] shrink-0 lg:w-auto"
                   >
                     <div
                       className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/40 via-accent/30 to-transparent opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100"
                       aria-hidden
                     />
-                    <div className="relative h-full rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40">
+                    <div className="relative flex h-full flex-col rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
-                          <Icon className="h-5 w-5" />
+                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
+                          <Icon className="h-6 w-6" />
                         </span>
                         <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                           {t.tag}
@@ -394,12 +406,20 @@ function Index() {
                       <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">
                         {t.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {benefit}
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                        {desc}
                       </p>
-                      <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
+                      {outcome && (
+                        <div className="mt-4 flex items-start gap-2 rounded-xl border border-primary/20 bg-primary/5 p-3">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                          <span className="text-xs font-medium leading-relaxed text-foreground/90">
+                            {outcome}
+                          </span>
+                        </div>
+                      )}
+                      <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
                         <span>{t.modules} cursos</span>
-                        <span className="text-primary">{t.hours}</span>
+                        <span className="font-semibold text-primary">{t.hours}</span>
                       </div>
                     </div>
                   </Link>
@@ -419,28 +439,34 @@ function Index() {
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
-              Resultados práticos
+              Prova de transformação
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-              O que você <span className="text-gradient">será capaz</span> de fazer
+            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
+              Resultados que você <span className="text-gradient">vai alcançar</span>
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Aplicações reais que você desenvolve ao longo das trilhas.
+              Aplicações reais que você desenvolve ao longo das trilhas — não teoria, entrega.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((c) => {
               const Icon = c.icon;
               return (
                 <div
                   key={c.label}
-                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90"
                 >
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
-                    <Icon className="h-4 w-4" />
+                  <div
+                    className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl transition-all group-hover:bg-primary/30"
+                    aria-hidden
+                  />
+                  <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20">
+                    <Icon className="h-7 w-7" />
                   </span>
-                  <span className="text-sm font-medium text-foreground">{c.label}</span>
+                  <div className="relative mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                    {c.label}
+                  </div>
                 </div>
               );
             })}
@@ -526,7 +552,7 @@ function Index() {
 
             <div className="order-1 lg:order-2">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
-                Instrutor
+                Por que aprender comigo?
               </div>
               <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
                 Fernando Cabral
