@@ -535,76 +535,181 @@ function Index() {
         </div>
       </section>
 
-      {/* JORNADA */}
-      <section id="jornada" className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-              Jornada do aluno
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Do diagnóstico ao resultado mensurável
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              Um percurso estruturado em quatro estágios para garantir aprendizado
-              aplicado e evolução verificável.
-            </p>
-          </div>
-
-          <div className="relative mt-16">
-            {/* connecting line */}
-            <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
-
-            <div className="grid gap-8 lg:grid-cols-4">
-              {journey.map((j, i) => (
-                <div
-                  key={j.step}
-                  className="relative flex flex-col items-start"
-                  style={{ animationDelay: `${i * 80}ms` }}
-                >
-                  <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold tracking-tight shadow-sm">
-                    {j.step}
-                  </div>
-                  <h3 className="mt-5 text-base font-semibold tracking-tight">
-                    {j.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {j.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section id="contato" className="relative overflow-hidden border-b border-border">
+      {/* JORNADA + CTA FINAL */}
+      <section
+        id="jornada"
+        className="relative overflow-hidden border-b border-border"
+      >
+        {/* Ambient background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,oklch(0.85_0.05_265_/_0.3),transparent)] dark:bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,oklch(0.4_0.08_265_/_0.35),transparent)]" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/15 to-transparent" />
+          <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,oklch(0.75_0.08_265_/_0.18),transparent_70%)] blur-2xl dark:bg-[radial-gradient(circle_at_center,oklch(0.45_0.12_265_/_0.25),transparent_70%)]" />
         </div>
 
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-10 shadow-xl sm:p-16">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+        <div className="mx-auto max-w-7xl px-6 py-28 sm:py-32">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground backdrop-blur">
+              <Compass className="h-3 w-3 text-primary" />
+              Jornada do aluno
+            </div>
+            <h2 className="mt-5 text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
+              Quatro estágios para transformar potencial em{" "}
+              <span className="italic text-muted-foreground">resultado</span>.
+            </h2>
+            <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Cada aluno é acompanhado de ponta a ponta — do diagnóstico
+              estratégico inicial até a entrega de resultado mensurável no seu
+              contexto profissional.
+            </p>
+          </div>
 
-            <div className="relative mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
-                Pronto para liderar o próximo capítulo?
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-muted-foreground sm:text-lg">
-                Inscreva-se no processo seletivo e dê o próximo passo na sua jornada
-                executiva com a FCIA Academy.
-              </p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <button className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl">
-                  Iniciar candidatura
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </button>
-                <button className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-6 py-3 text-sm font-medium transition-colors hover:bg-accent">
-                  Baixar catálogo
-                </button>
+          {/* Journey timeline */}
+          <div className="relative mt-20">
+            {/* progress rail */}
+            <div className="absolute left-0 right-0 top-8 hidden h-px overflow-hidden lg:block">
+              <div className="h-full w-full bg-border" />
+              <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-foreground via-primary to-foreground/30" />
+            </div>
+
+            <ol className="grid gap-10 lg:grid-cols-4 lg:gap-6">
+              {journey.map((j, i) => {
+                const Icon = [Compass, GraduationCap, Sparkles, Award][i];
+                return (
+                  <li key={j.step} className="group relative">
+                    {/* Node */}
+                    <div className="relative z-10 flex items-center gap-4 lg:block">
+                      <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-border bg-background shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-foreground group-hover:shadow-lg">
+                        <Icon className="h-6 w-6 text-foreground" />
+                        <span className="absolute -right-1.5 -top-1.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-background">
+                          {j.step}
+                        </span>
+                      </div>
+                      <div className="lg:hidden">
+                        <h3 className="text-base font-semibold tracking-tight">
+                          {j.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="ml-20 mt-2 lg:ml-0 lg:mt-6">
+                      <h3 className="hidden text-base font-semibold tracking-tight lg:block">
+                        {j.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {j.desc}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          {/* CTA FINAL — dominant */}
+          <div className="relative mt-24 overflow-hidden rounded-3xl border border-border bg-foreground p-10 text-background shadow-2xl shadow-foreground/20 sm:p-16">
+            {/* Layered glows */}
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/30 blur-3xl" />
+              <div className="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+              <div
+                className="absolute inset-0 opacity-[0.08]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+                  backgroundSize: "48px 48px",
+                  maskImage:
+                    "radial-gradient(ellipse 60% 80% at 50% 50%, black, transparent)",
+                }}
+              />
+            </div>
+
+            <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-background/15 bg-background/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-background/70 backdrop-blur">
+                  <Sparkles className="h-3 w-3" />
+                  Processo seletivo aberto
+                </div>
+                <h2 className="mt-6 text-balance text-3xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+                  Pronto para liderar
+                  <span className="block bg-gradient-to-r from-background via-background/90 to-background/60 bg-clip-text text-transparent">
+                    o próximo capítulo?
+                  </span>
+                </h2>
+                <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-background/75 sm:text-lg">
+                  Junte-se aos executivos que escolheram método sobre achismo.
+                  Vagas limitadas para garantir a curadoria e a qualidade da
+                  experiência FCIA.
+                </p>
+
+                <div id="contato" className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                  <button className="group relative inline-flex items-center gap-2 overflow-hidden rounded-md bg-background px-7 py-3.5 text-sm font-semibold text-foreground shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl">
+                    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                    <span className="relative">Iniciar candidatura</span>
+                    <ArrowRight className="relative h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+                  <button className="inline-flex items-center gap-2 rounded-md border border-background/20 bg-background/5 px-6 py-3.5 text-sm font-medium text-background backdrop-blur transition-colors hover:bg-background/10">
+                    Baixar catálogo completo
+                  </button>
+                </div>
+
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-background/60">
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                    Resposta em até 48h
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                    Mentoria individual
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                    Sem compromisso
+                  </span>
+                </div>
+              </div>
+
+              {/* Right — stat card */}
+              <div className="relative">
+                <div className="rounded-2xl border border-background/15 bg-background/[0.04] p-7 backdrop-blur-xl">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-background/60">
+                      Próxima turma
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/20 px-2.5 py-1 text-[10px] font-semibold text-primary">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                      87% preenchida
+                    </span>
+                  </div>
+
+                  <div className="mt-6 flex items-end gap-2">
+                    <div className="text-5xl font-semibold tracking-tight">12</div>
+                    <div className="mb-1.5 text-sm text-background/70">
+                      vagas
+                      <br />
+                      restantes
+                    </div>
+                  </div>
+
+                  <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-background/10">
+                    <div className="h-full w-[87%] rounded-full bg-gradient-to-r from-primary to-background" />
+                  </div>
+
+                  <div className="mt-6 space-y-3 border-t border-background/10 pt-5 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-background/60">Início</span>
+                      <span className="font-semibold">Jun · 2026</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-background/60">Duração</span>
+                      <span className="font-semibold">12 semanas</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-background/60">Formato</span>
+                      <span className="font-semibold">Híbrido · SP</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
