@@ -9,12 +9,43 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TurmasRouteImport } from './routes/turmas'
+import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as InscricaoRouteImport } from './routes/inscricao'
+import { Route as EmpresasRouteImport } from './routes/empresas'
+import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CursosSlugRouteImport } from './routes/cursos.$slug'
 
+const TurmasRoute = TurmasRouteImport.update({
+  id: '/turmas',
+  path: '/turmas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhasRoute = TrilhasRouteImport.update({
+  id: '/trilhas',
+  path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscricaoRoute = InscricaoRouteImport.update({
+  id: '/inscricao',
+  path: '/inscricao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresasRoute = EmpresasRouteImport.update({
+  id: '/empresas',
+  path: '/empresas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CursosRoute = CursosRouteImport.update({
+  id: '/cursos',
+  path: '/cursos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +53,128 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CursosSlugRoute = CursosSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CursosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cursos': typeof CursosRouteWithChildren
+  '/empresas': typeof EmpresasRoute
+  '/inscricao': typeof InscricaoRoute
   '/settings': typeof SettingsRoute
+  '/trilhas': typeof TrilhasRoute
+  '/turmas': typeof TurmasRoute
+  '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cursos': typeof CursosRouteWithChildren
+  '/empresas': typeof EmpresasRoute
+  '/inscricao': typeof InscricaoRoute
   '/settings': typeof SettingsRoute
+  '/trilhas': typeof TrilhasRoute
+  '/turmas': typeof TurmasRoute
+  '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cursos': typeof CursosRouteWithChildren
+  '/empresas': typeof EmpresasRoute
+  '/inscricao': typeof InscricaoRoute
   '/settings': typeof SettingsRoute
+  '/trilhas': typeof TrilhasRoute
+  '/turmas': typeof TurmasRoute
+  '/cursos/$slug': typeof CursosSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/settings'
+  fullPaths:
+    | '/'
+    | '/cursos'
+    | '/empresas'
+    | '/inscricao'
+    | '/settings'
+    | '/trilhas'
+    | '/turmas'
+    | '/cursos/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/settings'
-  id: '__root__' | '/' | '/settings'
+  to:
+    | '/'
+    | '/cursos'
+    | '/empresas'
+    | '/inscricao'
+    | '/settings'
+    | '/trilhas'
+    | '/turmas'
+    | '/cursos/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cursos'
+    | '/empresas'
+    | '/inscricao'
+    | '/settings'
+    | '/trilhas'
+    | '/turmas'
+    | '/cursos/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CursosRoute: typeof CursosRouteWithChildren
+  EmpresasRoute: typeof EmpresasRoute
+  InscricaoRoute: typeof InscricaoRoute
   SettingsRoute: typeof SettingsRoute
+  TrilhasRoute: typeof TrilhasRoute
+  TurmasRoute: typeof TurmasRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/turmas': {
+      id: '/turmas'
+      path: '/turmas'
+      fullPath: '/turmas'
+      preLoaderRoute: typeof TurmasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilhas': {
+      id: '/trilhas'
+      path: '/trilhas'
+      fullPath: '/trilhas'
+      preLoaderRoute: typeof TrilhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscricao': {
+      id: '/inscricao'
+      path: '/inscricao'
+      fullPath: '/inscricao'
+      preLoaderRoute: typeof InscricaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresas': {
+      id: '/empresas'
+      path: '/empresas'
+      fullPath: '/empresas'
+      preLoaderRoute: typeof EmpresasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cursos': {
+      id: '/cursos'
+      path: '/cursos'
+      fullPath: '/cursos'
+      preLoaderRoute: typeof CursosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,12 +184,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cursos/$slug': {
+      id: '/cursos/$slug'
+      path: '/$slug'
+      fullPath: '/cursos/$slug'
+      preLoaderRoute: typeof CursosSlugRouteImport
+      parentRoute: typeof CursosRoute
+    }
   }
 }
 
+interface CursosRouteChildren {
+  CursosSlugRoute: typeof CursosSlugRoute
+}
+
+const CursosRouteChildren: CursosRouteChildren = {
+  CursosSlugRoute: CursosSlugRoute,
+}
+
+const CursosRouteWithChildren =
+  CursosRoute._addFileChildren(CursosRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CursosRoute: CursosRouteWithChildren,
+  EmpresasRoute: EmpresasRoute,
+  InscricaoRoute: InscricaoRoute,
   SettingsRoute: SettingsRoute,
+  TrilhasRoute: TrilhasRoute,
+  TurmasRoute: TurmasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
