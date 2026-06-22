@@ -27,6 +27,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedQuizModuleIdRouteImport } from './routes/_authenticated/quiz.$moduleId'
 import { Route as AuthenticatedCursoSlugRouteImport } from './routes/_authenticated/curso.$slug'
+import { Route as AuthenticatedCertificadosIdRouteImport } from './routes/_authenticated/certificados.$id'
 
 const TurmasRoute = TurmasRouteImport.update({
   id: '/turmas',
@@ -119,6 +120,12 @@ const AuthenticatedCursoSlugRoute = AuthenticatedCursoSlugRouteImport.update({
   path: '/curso/$slug',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCertificadosIdRoute =
+  AuthenticatedCertificadosIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedCertificadosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -132,10 +139,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
-  '/certificados': typeof AuthenticatedCertificadosRoute
+  '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -151,10 +159,11 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
-  '/certificados': typeof AuthenticatedCertificadosRoute
+  '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -172,10 +181,11 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
-  '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
+  '/_authenticated/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/_authenticated/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/_authenticated/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/_authenticated/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
+    | '/certificados/$id'
     | '/curso/$slug'
     | '/quiz/$moduleId'
   fileRoutesByTo: FileRoutesByTo
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
+    | '/certificados/$id'
     | '/curso/$slug'
     | '/quiz/$moduleId'
   id:
@@ -236,6 +248,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/profile'
     | '/cursos/$slug'
+    | '/_authenticated/certificados/$id'
     | '/_authenticated/curso/$slug'
     | '/_authenticated/quiz/$moduleId'
   fileRoutesById: FileRoutesById
@@ -383,11 +396,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/certificados/$id': {
+      id: '/_authenticated/certificados/$id'
+      path: '/$id'
+      fullPath: '/certificados/$id'
+      preLoaderRoute: typeof AuthenticatedCertificadosIdRouteImport
+      parentRoute: typeof AuthenticatedCertificadosRoute
+    }
   }
 }
 
+interface AuthenticatedCertificadosRouteChildren {
+  AuthenticatedCertificadosIdRoute: typeof AuthenticatedCertificadosIdRoute
+}
+
+const AuthenticatedCertificadosRouteChildren: AuthenticatedCertificadosRouteChildren =
+  {
+    AuthenticatedCertificadosIdRoute: AuthenticatedCertificadosIdRoute,
+  }
+
+const AuthenticatedCertificadosRouteWithChildren =
+  AuthenticatedCertificadosRoute._addFileChildren(
+    AuthenticatedCertificadosRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
+  AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedCursoSlugRoute: typeof AuthenticatedCursoSlugRoute
@@ -395,7 +429,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
+  AuthenticatedCertificadosRoute: AuthenticatedCertificadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedCursoSlugRoute: AuthenticatedCursoSlugRoute,
