@@ -79,10 +79,3 @@ export function currentPlanIdQuery(userId: string | undefined) {
   });
 }
 
-// Legacy stub to satisfy type-check below.
-function _unused() {
-      if (error) throw error;
-      return ((data as string) ?? "free") as PlanId;
-    },
-  });
-}
