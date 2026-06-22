@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      certificates: {
+        Row: {
+          course_id: string
+          id: string
+          issued_at: string
+          pdf_url: string | null
+          user_id: string
+          validation_code: string
+        }
+        Insert: {
+          course_id: string
+          id?: string
+          issued_at?: string
+          pdf_url?: string | null
+          user_id: string
+          validation_code?: string
+        }
+        Update: {
+          course_id?: string
+          id?: string
+          issued_at?: string
+          pdf_url?: string | null
+          user_id?: string
+          validation_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       courses: {
         Row: {
           cover_url: string | null
@@ -382,6 +417,16 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      validate_certificate: {
+        Args: { _code: string }
+        Returns: {
+          course_slug: string
+          course_title: string
+          issued_at: string
+          student_name: string
+          validation_code: string
+        }[]
       }
     }
     Enums: {
