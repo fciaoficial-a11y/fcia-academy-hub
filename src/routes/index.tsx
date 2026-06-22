@@ -554,7 +554,7 @@ function Index() {
 
             <div className="order-1 lg:order-2">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
-                Instrutor
+                Por que aprender comigo?
               </div>
               <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
                 Fernando Cabral
