@@ -10,9 +10,11 @@ export type ModuleRow = {
   content_type: "video" | "pdf" | "text";
   content_url: string | null;
   content_text: string | null;
+  video_url: string | null;
   duration_minutes: number;
   sort_order: number;
 };
+
 
 export type CourseDetail = {
   id: string;
@@ -44,8 +46,9 @@ export function courseLearnQuery(slug: string) {
       const { data: modules, error: mErr } = await supabase
         .from("modules")
         .select(
-          "id, course_id, slug, title, description, content_type, content_url, content_text, duration_minutes, sort_order"
+          "id, course_id, slug, title, description, content_type, content_url, content_text, video_url, duration_minutes, sort_order"
         )
+
         .eq("course_id", course.id)
         .eq("is_published", true)
         .order("sort_order");
