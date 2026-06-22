@@ -245,6 +245,39 @@ export type Database = {
           },
         ]
       }
+      plans: {
+        Row: {
+          created_at: string
+          features: Json
+          id: string
+          is_active: boolean
+          name: string
+          price: number
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          features?: Json
+          id: string
+          is_active?: boolean
+          name: string
+          price?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          features?: Json
+          id?: string
+          is_active?: boolean
+          name?: string
+          price?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -388,6 +421,56 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          canceled_at: string | null
+          created_at: string
+          expires_at: string | null
+          id: string
+          plan_id: string
+          provider: string | null
+          provider_subscription_id: string | null
+          started_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          canceled_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          plan_id: string
+          provider?: string | null
+          provider_subscription_id?: string | null
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          canceled_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          plan_id?: string
+          provider?: string | null
+          provider_subscription_id?: string | null
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tracks: {
         Row: {
           created_at: string
@@ -399,6 +482,7 @@ export type Database = {
           level: string
           modules: number
           outcomes: string[]
+          required_plan: string
           slug: string
           sort_order: number
           tag: string
@@ -415,6 +499,7 @@ export type Database = {
           level: string
           modules?: number
           outcomes?: string[]
+          required_plan?: string
           slug: string
           sort_order?: number
           tag: string
@@ -431,6 +516,7 @@ export type Database = {
           level?: string
           modules?: number
           outcomes?: string[]
+          required_plan?: string
           slug?: string
           sort_order?: number
           tag?: string
@@ -552,8 +638,13 @@ export type Database = {
         Args: { _amount: number; _reason: string; _ref: string; _user: string }
         Returns: undefined
       }
+      can_access_track: {
+        Args: { _track: string; _user: string }
+        Returns: boolean
+      }
       check_achievements: { Args: { _user: string }; Returns: undefined }
       compute_level: { Args: { _xp: number }; Returns: string }
+      current_plan: { Args: { _user: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -561,6 +652,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      plan_rank: { Args: { _plan: string }; Returns: number }
       register_daily_login: {
         Args: never
         Returns: {
