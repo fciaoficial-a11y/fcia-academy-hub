@@ -5,12 +5,10 @@ import {
   Award,
   Brain,
   CheckCircle2,
-  Crown,
   Flame,
   Play,
   Sparkles,
   Star,
-  Target,
   Trophy,
   Zap,
   Bot,
@@ -147,14 +145,6 @@ const capabilities: { icon: LucideIcon; label: string }[] = [
   { icon: Coins, label: "Gerar novas fontes de renda" },
 ];
 
-const gamification = [
-  { icon: Zap, title: "Sistema de XP", desc: "Ganhe pontos a cada aula, projeto e desafio concluído." },
-  { icon: Trophy, title: "Conquistas", desc: "Desbloqueie badges por marcos práticos no seu trajeto." },
-  { icon: Crown, title: "Níveis", desc: "Evolua de iniciante a especialista em IA aplicada." },
-  { icon: Award, title: "Badges raros", desc: "Conquistas exclusivas para quem entrega projetos reais." },
-  { icon: Target, title: "Ranking ativo", desc: "Compita com outros alunos e suba na liga semanal." },
-  { icon: Flame, title: "Streak diário", desc: "Mantenha sua sequência e consolide o aprendizado." },
-];
 
 const instructorMetrics = [
   { value: "15+", label: "Anos em tecnologia" },
@@ -500,45 +490,6 @@ function Index() {
         </div>
       </section>
 
-      {/* ============ GAMIFICATION ============ */}
-      <section className="relative py-20 sm:py-28">
-        <div className="absolute inset-0 tech-grid opacity-20" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
-              Gamificação
-            </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-              Evoluir vira um <span className="text-gradient">jogo</span>
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              XP, conquistas, badges e ranking transformam consistência em hábito.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {gamification.map((g) => {
-              const Icon = g.icon;
-              return (
-                <div
-                  key={g.title}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/40 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40"
-                >
-                  <div
-                    className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all group-hover:bg-primary/25"
-                    aria-hidden
-                  />
-                  <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-glow">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="relative mt-5 font-display text-lg font-semibold">{g.title}</h3>
-                  <p className="relative mt-1.5 text-sm text-muted-foreground">{g.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* ============ INSTRUCTOR ============ */}
       <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-24 sm:py-32">
