@@ -200,15 +200,15 @@ function Index() {
                 Plataforma de IA · Tecnologia · Automação
               </div>
 
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.25rem]">
+              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.75rem]">
                 Domine <span className="text-gradient">IA</span> antes
                 <br />que ela transforme
                 <br />seu mercado.
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-xl text-xl leading-relaxed text-foreground/85">
                 Aprenda a criar automações, agentes inteligentes, conteúdo e soluções digitais
-                que geram resultados reais para profissionais e empresas.
+                que geram <span className="text-foreground font-medium">resultados reais</span> para profissionais e empresas.
               </p>
 
               {/* Urgency */}
