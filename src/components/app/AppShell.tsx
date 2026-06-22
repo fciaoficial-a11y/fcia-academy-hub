@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { LogOut, LayoutDashboard, Sparkles, User2 } from "lucide-react";
+import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
@@ -14,7 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const nav = [{ to: "/dashboard", label: "Dashboard", icon: LayoutDashboard }] as const;
+const nav = [
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/trilhas", label: "Trilhas", icon: BookOpen },
+  { to: "/profile", label: "Perfil", icon: UserCog },
+] as const;
 
 interface Profile {
   full_name: string | null;
