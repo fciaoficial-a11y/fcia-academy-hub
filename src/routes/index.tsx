@@ -1,6 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import {
-  Activity,
   ArrowUpRight,
   Award,
   Brain,
@@ -8,7 +7,6 @@ import {
   Flame,
   Play,
   Sparkles,
-  Star,
   Trophy,
   Zap,
   Bot,
