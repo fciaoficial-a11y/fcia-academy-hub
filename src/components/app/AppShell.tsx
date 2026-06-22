@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen } from "lucide-react";
+import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen, Award } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,6 +17,7 @@ import {
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/trilhas", label: "Trilhas", icon: BookOpen },
+  { to: "/certificados", label: "Certificados", icon: Award },
   { to: "/profile", label: "Perfil", icon: UserCog },
 ] as const;
 
