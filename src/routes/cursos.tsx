@@ -122,8 +122,8 @@ function CursosPage() {
               return (
                 <Link
                   key={c.id}
-                  to="/cursos/$slug"
-                  params={{ slug: track?.slug ?? "" }}
+                  to="/curso/$slug"
+                  params={{ slug: c.slug }}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(0,0,0,0.4)]"
                 >
                   <div className="relative h-28 overflow-hidden border-b border-border bg-surface">
