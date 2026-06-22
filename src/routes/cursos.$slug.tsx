@@ -94,7 +94,7 @@ function CourseDetail() {
               Resultados concretos, aplicáveis na sua semana de trabalho.
             </h2>
             <ul className="mt-8 space-y-4">
-              {track.outcomes.map((o) => (
+              {track.outcomes.map((o: string) => (
                 <li key={o} className="flex items-start gap-3 rounded-2xl border border-border bg-background p-5">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 text-primary" />
                   <span className="text-base text-foreground">{o}</span>
