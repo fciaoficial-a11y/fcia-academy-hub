@@ -36,6 +36,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [profile, setProfile] = useState<Profile | null>(null);
   const [email, setEmail] = useState<string>("");
+  const isAdmin = useQuery(isAdminQuery);
+  const navItems = isAdmin.data ? [...baseNav, adminNav] : baseNav;
 
   useEffect(() => {
     let mounted = true;
