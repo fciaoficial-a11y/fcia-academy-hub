@@ -176,5 +176,3 @@ function Meta({
   );
 }
 
-function Sparkle() { return <Sparkles className="h-4 w-4" />; }
-void Sparkle;
