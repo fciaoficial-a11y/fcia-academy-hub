@@ -8,6 +8,7 @@ import {
   ListChecks,
   ListTree,
   Loader2,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
