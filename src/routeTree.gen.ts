@@ -21,11 +21,14 @@ import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ValidarCertificadoCodigoRouteImport } from './routes/validar-certificado.$codigo'
 import { Route as CursosSlugRouteImport } from './routes/cursos.$slug'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedQuizModuleIdRouteImport } from './routes/_authenticated/quiz.$moduleId'
 import { Route as AuthenticatedCursoSlugRouteImport } from './routes/_authenticated/curso.$slug'
+import { Route as AuthenticatedCertificadosIdRouteImport } from './routes/_authenticated/certificados.$id'
 
 const TurmasRoute = TurmasRouteImport.update({
   id: '/turmas',
@@ -86,6 +89,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ValidarCertificadoCodigoRoute =
+  ValidarCertificadoCodigoRouteImport.update({
+    id: '/validar-certificado/$codigo',
+    path: '/validar-certificado/$codigo',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CursosSlugRoute = CursosSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -101,6 +110,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCertificadosRoute =
+  AuthenticatedCertificadosRouteImport.update({
+    id: '/certificados',
+    path: '/certificados',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedQuizModuleIdRoute =
   AuthenticatedQuizModuleIdRouteImport.update({
     id: '/quiz/$moduleId',
@@ -112,6 +127,12 @@ const AuthenticatedCursoSlugRoute = AuthenticatedCursoSlugRouteImport.update({
   path: '/curso/$slug',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCertificadosIdRoute =
+  AuthenticatedCertificadosIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedCertificadosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -125,9 +146,12 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
+  '/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -143,9 +167,12 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
+  '/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -163,9 +190,12 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/_authenticated/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
+  '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
+  '/_authenticated/certificados/$id': typeof AuthenticatedCertificadosIdRoute
   '/_authenticated/curso/$slug': typeof AuthenticatedCursoSlugRoute
   '/_authenticated/quiz/$moduleId': typeof AuthenticatedQuizModuleIdRoute
 }
@@ -183,9 +213,12 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/certificados'
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
+    | '/validar-certificado/$codigo'
+    | '/certificados/$id'
     | '/curso/$slug'
     | '/quiz/$moduleId'
   fileRoutesByTo: FileRoutesByTo
@@ -201,9 +234,12 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/certificados'
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
+    | '/validar-certificado/$codigo'
+    | '/certificados/$id'
     | '/curso/$slug'
     | '/quiz/$moduleId'
   id:
@@ -220,9 +256,12 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/_authenticated/certificados'
     | '/_authenticated/dashboard'
     | '/_authenticated/profile'
     | '/cursos/$slug'
+    | '/validar-certificado/$codigo'
+    | '/_authenticated/certificados/$id'
     | '/_authenticated/curso/$slug'
     | '/_authenticated/quiz/$moduleId'
   fileRoutesById: FileRoutesById
@@ -240,6 +279,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   TrilhasRoute: typeof TrilhasRoute
   TurmasRoute: typeof TurmasRoute
+  ValidarCertificadoCodigoRoute: typeof ValidarCertificadoCodigoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -328,6 +368,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/validar-certificado/$codigo': {
+      id: '/validar-certificado/$codigo'
+      path: '/validar-certificado/$codigo'
+      fullPath: '/validar-certificado/$codigo'
+      preLoaderRoute: typeof ValidarCertificadoCodigoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cursos/$slug': {
       id: '/cursos/$slug'
       path: '/$slug'
@@ -349,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/certificados': {
+      id: '/_authenticated/certificados'
+      path: '/certificados'
+      fullPath: '/certificados'
+      preLoaderRoute: typeof AuthenticatedCertificadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/quiz/$moduleId': {
       id: '/_authenticated/quiz/$moduleId'
       path: '/quiz/$moduleId'
@@ -363,10 +417,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/certificados/$id': {
+      id: '/_authenticated/certificados/$id'
+      path: '/$id'
+      fullPath: '/certificados/$id'
+      preLoaderRoute: typeof AuthenticatedCertificadosIdRouteImport
+      parentRoute: typeof AuthenticatedCertificadosRoute
+    }
   }
 }
 
+interface AuthenticatedCertificadosRouteChildren {
+  AuthenticatedCertificadosIdRoute: typeof AuthenticatedCertificadosIdRoute
+}
+
+const AuthenticatedCertificadosRouteChildren: AuthenticatedCertificadosRouteChildren =
+  {
+    AuthenticatedCertificadosIdRoute: AuthenticatedCertificadosIdRoute,
+  }
+
+const AuthenticatedCertificadosRouteWithChildren =
+  AuthenticatedCertificadosRoute._addFileChildren(
+    AuthenticatedCertificadosRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedCursoSlugRoute: typeof AuthenticatedCursoSlugRoute
@@ -374,6 +450,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCertificadosRoute: AuthenticatedCertificadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedCursoSlugRoute: AuthenticatedCursoSlugRoute,
@@ -407,6 +484,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   TrilhasRoute: TrilhasRoute,
   TurmasRoute: TurmasRoute,
+  ValidarCertificadoCodigoRoute: ValidarCertificadoCodigoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
