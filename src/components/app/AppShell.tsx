@@ -93,7 +93,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {nav.map((item) => {
+            {navItems.map((item) => {
               const active = pathname === item.to;
               const Icon = item.icon;
               return (
