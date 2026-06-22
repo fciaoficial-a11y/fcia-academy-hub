@@ -38,6 +38,7 @@ const NAV = [
   { to: "/admin/questoes", label: "Questões", icon: ListChecks, exact: false },
   { to: "/admin/certificados", label: "Certificados", icon: Award, exact: false },
   { to: "/admin/usuarios", label: "Usuários", icon: Users, exact: false },
+  { to: "/admin/ai-studio", label: "AI Studio", icon: Sparkles, exact: false },
 ] as const;
 
 function AdminLayout() {
