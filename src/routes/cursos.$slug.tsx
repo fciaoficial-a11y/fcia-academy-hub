@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2, Clock, GraduationCap, Layers, Sparkles, Users } from "lucide-react";
 import { Section, Eyebrow } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
+import { FAQ } from "@/components/site/FAQ";
 import { getTrack, tracks } from "@/lib/catalog";
 
 export const Route = createFileRoute("/cursos/$slug")({
