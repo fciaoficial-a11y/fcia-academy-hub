@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowUpRight, BookOpen, Clock, GraduationCap, Layers, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, BookOpen, Clock, GraduationCap, Layers, Users } from "lucide-react";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Testimonials } from "@/components/site/Testimonials";
 import { FAQ } from "@/components/site/FAQ";
