@@ -229,8 +229,8 @@ function Index() {
                 })}
               </ul>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <PrimaryCTA to="/inscricao" className="h-14 px-9 text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
                 <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
               </div>
 
