@@ -12,6 +12,8 @@ import {
   Zap,
 } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
+import { FAQ } from "@/components/site/FAQ";
 import { tracks } from "@/lib/catalog";
 
 export const Route = createFileRoute("/")({
@@ -320,6 +322,9 @@ function Index() {
         </div>
       </Section>
 
+      {/* PROVA SOCIAL */}
+      <Testimonials />
+
       {/* JORNADA + CTA */}
       <Section>
         <SectionHeading
@@ -394,6 +399,9 @@ function Index() {
           </div>
         </div>
       </Section>
+
+      {/* FAQ */}
+      <FAQ />
     </>
   );
 }
