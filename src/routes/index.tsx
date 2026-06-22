@@ -441,28 +441,34 @@ function Index() {
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
-              Resultados práticos
+              Prova de transformação
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-              O que você <span className="text-gradient">será capaz</span> de fazer
+            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
+              Resultados que você <span className="text-gradient">vai alcançar</span>
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Aplicações reais que você desenvolve ao longo das trilhas.
+              Aplicações reais que você desenvolve ao longo das trilhas — não teoria, entrega.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((c) => {
               const Icon = c.icon;
               return (
                 <div
                   key={c.label}
-                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90"
                 >
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
-                    <Icon className="h-4 w-4" />
+                  <div
+                    className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl transition-all group-hover:bg-primary/30"
+                    aria-hidden
+                  />
+                  <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20">
+                    <Icon className="h-7 w-7" />
                   </span>
-                  <span className="text-sm font-medium text-foreground">{c.label}</span>
+                  <div className="relative mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                    {c.label}
+                  </div>
                 </div>
               );
             })}
