@@ -133,7 +133,9 @@ function RootComponent() {
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const hideChrome =
-    AUTH_ROUTES.includes(pathname) || pathname.startsWith("/dashboard");
+    AUTH_ROUTES.includes(pathname) ||
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/profile");
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
