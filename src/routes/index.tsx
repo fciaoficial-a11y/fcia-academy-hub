@@ -366,130 +366,170 @@ function Index() {
         </div>
       </section>
 
-      {/* METRICS */}
-      <section className="border-b border-border bg-card/30">
-        <div className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {metrics.map((m) => (
-              <div key={m.label} className="text-center md:text-left">
-                <div className="text-3xl font-semibold tracking-tight sm:text-4xl">
+      {/* PROVA DE VALOR + DIFERENCIAIS */}
+      <section
+        id="diferenciais"
+        className="relative overflow-hidden border-b border-border bg-card/30"
+      >
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/15 to-transparent" />
+          <div className="absolute -left-32 top-1/3 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute -right-32 bottom-1/4 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
+        </div>
+
+        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <Sparkles className="h-3 w-3 text-primary" />
+              Prova de valor
+            </div>
+            <h2 className="mt-5 text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
+              Resultados que sustentam reputação de mercado
+            </h2>
+            <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Não falamos em promessas — falamos em números, método e impacto
+              comprovado em quem já passou pela FCIA Academy.
+            </p>
+          </div>
+
+          {/* Metrics row */}
+          <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-4">
+            {metrics.map((m, i) => (
+              <div
+                key={m.label}
+                className="group relative bg-background p-6 transition-colors hover:bg-card sm:p-8"
+              >
+                <div className="absolute left-0 top-0 h-0.5 w-0 bg-gradient-to-r from-primary to-foreground transition-all duration-500 group-hover:w-full" />
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  0{i + 1}
+                </div>
+                <div className="mt-3 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
                   {m.value}
                 </div>
-                <div className="mt-1.5 text-xs uppercase tracking-wider text-muted-foreground">
-                  {m.label}
-                </div>
+                <div className="mt-2 text-sm text-muted-foreground">{m.label}</div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* PROGRAMAS */}
-      <section id="programas" className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Trilhas executivas
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Programas avançados para acelerar sua liderança
-              </h2>
-              <p className="mt-3 text-muted-foreground">
-                Currículos curados por especialistas em atuação no mercado, organizados
-                em trilhas modulares de progressão real.
-              </p>
-            </div>
-            <a
-              href="#"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
-            >
-              Ver todos os programas
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-          </div>
+          {/* Bento grid — diferenciais + testimonial */}
+          <div className="mt-10 grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
+            {/* Highlight card — large */}
+            <article className="group relative col-span-1 row-span-2 overflow-hidden rounded-2xl border border-border bg-foreground p-8 text-background lg:col-span-1">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,oklch(0.35_0.1_265),transparent_60%)] opacity-70" />
+              <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
 
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {tracks.map((t) => {
-              const Icon = t.icon;
+              <div className="relative flex h-full flex-col">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-background/10 backdrop-blur">
+                  <GraduationCap className="h-6 w-6" />
+                </span>
+
+                <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-background/60">
+                  Metodologia FCIA
+                </p>
+                <h3 className="mt-2 text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+                  Aprender, aplicar, decidir.
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-background/75">
+                  Cada módulo é construído em três camadas: fundamentação
+                  conceitual, simulação de cenário real e entrega aplicada ao seu
+                  negócio. Você sai com decisão, não com diploma.
+                </p>
+
+                <div className="mt-auto space-y-2.5 pt-8">
+                  {[
+                    "Cases de boards reais",
+                    "Mentoria executiva 1:1",
+                    "Laboratórios de decisão",
+                    "Avaliação por entrega",
+                  ].map((b) => (
+                    <div key={b} className="flex items-center gap-2 text-sm">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                      <span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            {/* Differentiators — small cards */}
+            {differentiators.map((d) => {
+              const Icon = d.icon;
               return (
-                <article
-                  key={t.title}
-                  className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-xl hover:shadow-foreground/5"
+                <div
+                  key={d.title}
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-xl hover:shadow-foreground/5"
                 >
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                  <div className="relative flex items-center justify-between">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-foreground text-background transition-transform duration-300 group-hover:scale-110">
+                  <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/5 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="flex items-start gap-4">
+                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <span className="rounded-full border border-border bg-background px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                      {t.level}
-                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-base font-semibold tracking-tight">
+                        {d.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {d.desc}
+                      </p>
+                    </div>
                   </div>
-
-                  <p className="relative mt-6 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                    {t.tag}
-                  </p>
-                  <h3 className="relative mt-2 text-lg font-semibold tracking-tight">
-                    {t.title}
-                  </h3>
-                  <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {t.desc}
-                  </p>
-
-                  <div className="relative mt-6 flex items-center gap-1.5 text-sm font-medium text-foreground">
-                    Conhecer programa
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </article>
+                </div>
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* DIFERENCIAIS */}
-      <section id="diferenciais" className="relative border-b border-border bg-card/30">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Por que FCIA
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Uma plataforma desenhada para o ritmo de quem lidera.
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                Combinamos rigor acadêmico, prática executiva e acompanhamento
-                individual para entregar evolução real — não apenas conteúdo.
-              </p>
-              <button className="mt-8 inline-flex items-center gap-2 rounded-md border border-input bg-background px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
-                Conhecer a metodologia
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {differentiators.map((d) => {
-                const Icon = d.icon;
-                return (
-                  <div
-                    key={d.title}
-                    className="group rounded-xl border border-border bg-background p-6 transition-all hover:border-foreground/20 hover:shadow-lg"
-                  >
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors group-hover:bg-foreground group-hover:text-background">
-                      <Icon className="h-4.5 w-4.5" />
-                    </span>
-                    <h3 className="mt-5 text-base font-semibold tracking-tight">
-                      {d.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      {d.desc}
-                    </p>
+          {/* Testimonial + logos */}
+          <div className="mt-10 grid gap-6 rounded-2xl border border-border bg-background p-8 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+            <figure className="relative">
+              <div className="text-5xl leading-none text-foreground/15 sm:text-6xl">
+                &ldquo;
+              </div>
+              <blockquote className="-mt-4 text-pretty text-xl font-medium leading-snug tracking-tight text-foreground sm:text-2xl">
+                A FCIA Academy mudou a forma como nossa diretoria toma decisão.
+                Saímos de discussões circulares para um framework objetivo de
+                priorização e execução.
+              </blockquote>
+              <figcaption className="mt-6 flex items-center gap-3">
+                <div
+                  className="h-11 w-11 rounded-full border border-border shadow-sm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, oklch(0.7 0.12 265), oklch(0.45 0.1 265))",
+                  }}
+                />
+                <div>
+                  <div className="text-sm font-semibold">Helena Vasconcelos</div>
+                  <div className="text-xs text-muted-foreground">
+                    COO · Grupo industrial · ex-McKinsey
                   </div>
-                );
-              })}
+                </div>
+              </figcaption>
+            </figure>
+
+            <div className="flex flex-col justify-between gap-6 border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Confiada por líderes de
+              </p>
+              <div className="grid grid-cols-3 gap-x-6 gap-y-4 text-sm font-semibold tracking-tight text-muted-foreground/70">
+                {["ITAÚ", "VALE", "AMBEV", "B3", "PETROBRAS", "NUBANK"].map(
+                  (l) => (
+                    <div
+                      key={l}
+                      className="text-center transition-colors hover:text-foreground"
+                    >
+                      {l}
+                    </div>
+                  ),
+                )}
+              </div>
+              <a
+                href="#"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
+              >
+                Ver casos de impacto
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </a>
             </div>
           </div>
         </div>
