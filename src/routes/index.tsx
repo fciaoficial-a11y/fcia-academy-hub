@@ -99,17 +99,17 @@ function SecondaryCTA({
 
 // ---------------- Data ----------------
 const heroStats = [
-  { value: "94%", label: "Satisfação dos alunos" },
-  { value: "+300h", label: "Conteúdo planejado" },
-  { value: "6", label: "Trilhas de aprendizado" },
-  { value: "100%", label: "Certificação automática" },
+  { value: "6", label: "Trilhas" },
+  { value: "18", label: "Cursos" },
+  { value: "72", label: "Módulos" },
+  { value: "100%", label: "Certificados verificáveis" },
 ];
 
 const socialProof = [
-  { value: "94%", label: "Satisfação dos alunos", icon: Star },
-  { value: "4.9", label: "Avaliação média", icon: Trophy },
-  { value: "+300h", label: "Conteúdo on-demand", icon: Play },
-  { value: "24/7", label: "Comunidade ativa", icon: Activity },
+  { value: "6", label: "Trilhas de aprendizado", icon: Layers },
+  { value: "18", label: "Cursos práticos", icon: Play },
+  { value: "72", label: "Módulos aplicados", icon: Workflow },
+  { value: "100%", label: "Certificados verificáveis", icon: Award },
 ];
 
 const urgencyPoints = [
@@ -119,19 +119,31 @@ const urgencyPoints = [
 ];
 
 // Benefit-oriented descriptions per track (home only)
-const trackBenefits: Record<string, string> = {
-  "ia-aplicada":
-    "Automatize tarefas, aumente produtividade e economize horas por semana.",
-  "dev-moderno":
-    "Construa aplicações e soluções reais utilizando tecnologias atuais.",
-  empreendedorismo:
-    "Use IA para criar produtos, serviços e novas fontes de receita.",
-  "profissional-futuro":
-    "Desenvolva competências cada vez mais valorizadas pelo mercado.",
-  inovacao:
-    "Aprenda a identificar oportunidades e criar vantagem competitiva.",
-  "renda-freelance":
-    "Transforme conhecimento em serviços, projetos e oportunidades de renda.",
+const trackBenefits: Record<string, { desc: string; outcome: string }> = {
+  "ia-aplicada": {
+    desc: "Automatize tarefas repetitivas, aumente sua produtividade e economize horas de trabalho por semana com inteligência artificial.",
+    outcome: "Você sai aplicando IA no seu dia a dia profissional.",
+  },
+  "dev-moderno": {
+    desc: "Construa aplicações, APIs e produtos digitais reais com as tecnologias mais usadas pelo mercado hoje.",
+    outcome: "Você sai capaz de entregar projetos completos.",
+  },
+  empreendedorismo: {
+    desc: "Use IA e automação para criar produtos, serviços e novas fontes de receita escaláveis.",
+    outcome: "Você sai com um modelo de negócio validado.",
+  },
+  "profissional-futuro": {
+    desc: "Desenvolva as competências comportamentais e técnicas mais valorizadas pelas empresas dos próximos 10 anos.",
+    outcome: "Você sai pronto para liderar a transformação.",
+  },
+  inovacao: {
+    desc: "Aprenda a identificar oportunidades, aplicar novas tecnologias e criar vantagem competitiva real no seu setor.",
+    outcome: "Você sai pensando como agente de inovação.",
+  },
+  "renda-freelance": {
+    desc: "Transforme conhecimento em serviços, projetos freelance e novas oportunidades de renda recorrente.",
+    outcome: "Você sai com um caminho prático para monetizar.",
+  },
 };
 
 const capabilities: { icon: LucideIcon; label: string }[] = [
