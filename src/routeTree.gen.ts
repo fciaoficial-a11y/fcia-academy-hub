@@ -24,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CursosSlugRouteImport } from './routes/cursos.$slug'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedQuizModuleIdRouteImport } from './routes/_authenticated/quiz.$moduleId'
 import { Route as AuthenticatedCursoSlugRouteImport } from './routes/_authenticated/curso.$slug'
 
@@ -101,6 +102,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCertificadosRoute =
+  AuthenticatedCertificadosRouteImport.update({
+    id: '/certificados',
+    path: '/certificados',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedQuizModuleIdRoute =
   AuthenticatedQuizModuleIdRouteImport.update({
     id: '/quiz/$moduleId',
@@ -125,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/certificados': typeof AuthenticatedCertificadosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
@@ -143,6 +151,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/certificados': typeof AuthenticatedCertificadosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
@@ -163,6 +172,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/trilhas': typeof TrilhasRoute
   '/turmas': typeof TurmasRoute
+  '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/certificados'
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
@@ -201,6 +212,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/certificados'
     | '/dashboard'
     | '/profile'
     | '/cursos/$slug'
@@ -220,6 +232,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/trilhas'
     | '/turmas'
+    | '/_authenticated/certificados'
     | '/_authenticated/dashboard'
     | '/_authenticated/profile'
     | '/cursos/$slug'
@@ -349,6 +362,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/certificados': {
+      id: '/_authenticated/certificados'
+      path: '/certificados'
+      fullPath: '/certificados'
+      preLoaderRoute: typeof AuthenticatedCertificadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/quiz/$moduleId': {
       id: '/_authenticated/quiz/$moduleId'
       path: '/quiz/$moduleId'
@@ -367,6 +387,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedCursoSlugRoute: typeof AuthenticatedCursoSlugRoute
@@ -374,6 +395,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedCursoSlugRoute: AuthenticatedCursoSlugRoute,
