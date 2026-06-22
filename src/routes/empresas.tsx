@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, BarChart3, Building2, CheckCircle2, ShieldCheck, Users } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
+import { FAQ } from "@/components/site/FAQ";
 
 export const Route = createFileRoute("/empresas")({
   head: () => ({
@@ -118,6 +120,24 @@ function EmpresasPage() {
           ))}
         </div>
       </Section>
+
+      <Testimonials
+        eyebrow="Empresas que treinam com a FCIA"
+        title="Resultado mensurável em times reais."
+        description="De startups em escala a corporações: a FCIA acelera capacitação com clareza, ritmo e governança."
+      />
+
+      <FAQ
+        eyebrow="Dúvidas corporativas"
+        title="Tudo o que RH e líderes costumam perguntar."
+        items={[
+          { q: "Como funciona a precificação corporativa?", a: "Trabalhamos por licenças anuais com escala por número de colaboradores. Quanto maior o time, menor o custo por licença." },
+          { q: "Conseguem customizar trilhas para a nossa realidade?", a: "Sim. Nosso time de conteúdo desenha trilhas específicas por área, com cases e dados da sua empresa." },
+          { q: "Há integração com nosso LMS / SSO?", a: "Sim. Integramos com os principais LMSs do mercado e oferecemos SSO via SAML, Google e Microsoft." },
+          { q: "Qual o tempo médio de implementação?", a: "Entre 7 e 21 dias, dependendo do escopo de customização e integrações." },
+          { q: "Vocês emitem nota fiscal e contrato MSA?", a: "Sim. Atuamos com contratos MSA, NDAs específicos e nota fiscal nacional." },
+        ]}
+      />
 
       <Section id="contato">
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1fr]">

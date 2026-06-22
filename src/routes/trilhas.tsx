@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
+import { FAQ } from "@/components/site/FAQ";
 import { tracks } from "@/lib/catalog";
 
 export const Route = createFileRoute("/trilhas")({
@@ -82,6 +84,9 @@ function TrilhasPage() {
           </Link>
         </div>
       </Section>
+
+      <Testimonials />
+      <FAQ />
     </>
   );
 }
