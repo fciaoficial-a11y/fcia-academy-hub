@@ -72,7 +72,15 @@ export function currentPlanIdQuery(userId: string | undefined) {
     queryKey: ["current-plan", userId],
     enabled: !!userId,
     queryFn: async (): Promise<PlanId> => {
-      const { data, error } = await supabase.rpc("current_plan" as never, { _user: userId });
+      const { data, error } = await (supabase.rpc as unknown as (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }>)("current_plan", { _user: userId });
+      if (error) throw error;
+      return ((data as string) ?? "free") as PlanId;
+    },
+  });
+}
+
+// Legacy stub to satisfy type-check below.
+function _unused() {
       if (error) throw error;
       return ((data as string) ?? "free") as PlanId;
     },
