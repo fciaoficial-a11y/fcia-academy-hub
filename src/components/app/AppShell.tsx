@@ -1,11 +1,12 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen, Award, Zap } from "lucide-react";
+import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen, Award, Zap, Shield } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { registerDailyLogin } from "@/lib/gamification";
+import { isAdminQuery } from "@/lib/admin-api";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,13 +16,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const nav = [
+const baseNav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/trilhas", label: "Trilhas", icon: BookOpen },
   { to: "/evolucao", label: "Evolução", icon: Zap },
   { to: "/certificados", label: "Certificados", icon: Award },
   { to: "/profile", label: "Perfil", icon: UserCog },
 ] as const;
+const adminNav = { to: "/admin", label: "Admin", icon: Shield } as const;
 
 interface Profile {
   full_name: string | null;
@@ -34,6 +36,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [profile, setProfile] = useState<Profile | null>(null);
   const [email, setEmail] = useState<string>("");
+  const isAdmin = useQuery(isAdminQuery);
+  const navItems = isAdmin.data ? [...baseNav, adminNav] : baseNav;
 
   useEffect(() => {
     let mounted = true;
@@ -91,7 +95,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {nav.map((item) => {
+            {navItems.map((item) => {
               const active = pathname === item.to;
               const Icon = item.icon;
               return (

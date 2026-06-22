@@ -53,6 +53,7 @@ export type Database = {
           id: string
           issued_at: string
           pdf_url: string | null
+          revoked_at: string | null
           user_id: string
           validation_code: string
         }
@@ -61,6 +62,7 @@ export type Database = {
           id?: string
           issued_at?: string
           pdf_url?: string | null
+          revoked_at?: string | null
           user_id: string
           validation_code?: string
         }
@@ -69,6 +71,7 @@ export type Database = {
           id?: string
           issued_at?: string
           pdf_url?: string | null
+          revoked_at?: string | null
           user_id?: string
           validation_code?: string
         }
@@ -250,6 +253,8 @@ export type Database = {
           id: string
           last_login_at: string | null
           level: string
+          plan: string
+          status: string
           streak: number
           updated_at: string
           xp: number
@@ -261,6 +266,8 @@ export type Database = {
           id: string
           last_login_at?: string | null
           level?: string
+          plan?: string
+          status?: string
           streak?: number
           updated_at?: string
           xp?: number
@@ -272,6 +279,8 @@ export type Database = {
           id?: string
           last_login_at?: string | null
           level?: string
+          plan?: string
+          status?: string
           streak?: number
           updated_at?: string
           xp?: number
@@ -512,6 +521,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_list_users: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          certificates_count: number
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          level: string
+          plan: string
+          role: string
+          status: string
+          streak: number
+          xp: number
+        }[]
+      }
+      admin_metrics: {
+        Args: never
+        Returns: {
+          active_courses: number
+          approval_rate: number
+          certificates_issued: number
+          courses_completed: number
+          total_students: number
+        }[]
+      }
       award_xp: {
         Args: { _amount: number; _reason: string; _ref: string; _user: string }
         Returns: undefined
