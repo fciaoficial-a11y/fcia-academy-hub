@@ -1,9 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import {
   Activity,
   ArrowUpRight,
   Award,
-  Bot,
   Brain,
   CheckCircle2,
   Crown,
@@ -14,9 +13,20 @@ import {
   Target,
   Trophy,
   Zap,
+  Bot,
+  Workflow,
+  FileText,
+  Layers,
+  Video,
+  Briefcase,
+  Building2,
+  Coins,
+  type LucideIcon,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import { FAQ } from "@/components/site/FAQ";
 import { tracks } from "@/lib/catalog";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,11 +48,63 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+// ---------------- Harmonized CTA system ----------------
+const ctaBase =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold leading-none transition-all";
+
+function PrimaryCTA({
+  to,
+  children,
+  className,
+}: {
+  to: LinkProps["to"];
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        ctaBase,
+        "group bg-gradient-to-r from-primary to-accent text-primary-foreground glow-primary hover:-translate-y-0.5",
+        className,
+      )}
+    >
+      {children}
+      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    </Link>
+  );
+}
+
+function SecondaryCTA({
+  to,
+  children,
+  className,
+}: {
+  to: LinkProps["to"];
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        ctaBase,
+        "border border-white/15 bg-white/5 text-foreground backdrop-blur hover:bg-white/10",
+        className,
+      )}
+    >
+      {children}
+    </Link>
+  );
+}
+
+// ---------------- Data ----------------
 const heroStats = [
-  { value: "+20", label: "Cursos planejados" },
+  { value: "94%", label: "Satisfação dos alunos" },
+  { value: "+300h", label: "Conteúdo planejado" },
   { value: "6", label: "Trilhas de aprendizado" },
-  { value: "100%", label: "Certificados automáticos" },
-  { value: "∞", label: "Projetos reais" },
+  { value: "100%", label: "Certificação automática" },
 ];
 
 const socialProof = [
@@ -50,6 +112,39 @@ const socialProof = [
   { value: "4.9", label: "Avaliação média", icon: Trophy },
   { value: "+300h", label: "Conteúdo on-demand", icon: Play },
   { value: "24/7", label: "Comunidade ativa", icon: Activity },
+];
+
+const urgencyPoints = [
+  { icon: Flame, text: "O mercado está mudando rapidamente" },
+  { icon: Zap, text: "IA já transforma empresas e profissões" },
+  { icon: Sparkles, text: "Quem aprende primeiro cria vantagem" },
+];
+
+// Benefit-oriented descriptions per track (home only)
+const trackBenefits: Record<string, string> = {
+  "ia-aplicada":
+    "Automatize tarefas, aumente produtividade e economize horas por semana.",
+  "dev-moderno":
+    "Construa aplicações e soluções reais utilizando tecnologias atuais.",
+  empreendedorismo:
+    "Use IA para criar produtos, serviços e novas fontes de receita.",
+  "profissional-futuro":
+    "Desenvolva competências cada vez mais valorizadas pelo mercado.",
+  inovacao:
+    "Aprenda a identificar oportunidades e criar vantagem competitiva.",
+  "renda-freelance":
+    "Transforme conhecimento em serviços, projetos e oportunidades de renda.",
+};
+
+const capabilities: { icon: LucideIcon; label: string }[] = [
+  { icon: Bot, label: "Criar agentes de IA" },
+  { icon: Workflow, label: "Automatizar processos" },
+  { icon: FileText, label: "Produzir conteúdo em escala" },
+  { icon: Layers, label: "Construir soluções SaaS" },
+  { icon: Video, label: "Criar vídeos com IA" },
+  { icon: Briefcase, label: "Estruturar negócios digitais" },
+  { icon: Building2, label: "Aplicar automações empresariais" },
+  { icon: Coins, label: "Gerar novas fontes de renda" },
 ];
 
 const gamification = [
@@ -67,14 +162,21 @@ const instructorMetrics = [
   { value: "+10k", label: "Alunos impactados" },
 ];
 
+const instructorReasons = [
+  "Especialista em IA aplicada",
+  "Desenvolvimento SaaS",
+  "Automação empresarial",
+  "Branding estratégico",
+  "Educação tecnológica",
+  "Metodologia própria baseada em aplicação prática",
+];
+
 function Index() {
   return (
     <>
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden">
-        {/* Animated tech grid */}
         <div className="absolute inset-0 tech-grid opacity-60" aria-hidden />
-        {/* Gradient orbs */}
         <div
           className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/25 blur-[160px] animate-pulse-glow"
           aria-hidden
@@ -85,7 +187,7 @@ function Index() {
         />
 
         <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-16 sm:pt-24 lg:pb-32">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
+          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
             {/* Copy */}
             <div className="animate-fade-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
@@ -96,34 +198,41 @@ function Index() {
                 Plataforma de IA · Tecnologia · Automação
               </div>
 
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-                Aprenda{" "}
-                <span className="text-gradient">IA, Automação</span>
-                <br />e Tecnologia Aplicada
+              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.25rem]">
+                Domine <span className="text-gradient">IA</span> antes
+                <br />que ela transforme
+                <br />seu mercado.
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Transforme conhecimento em resultado real através de cursos práticos, projetos, certificações e metodologias usadas no mercado.
+                Aprenda a criar automações, agentes inteligentes, conteúdo e soluções digitais
+                que geram resultados reais para profissionais e empresas.
               </p>
 
+              {/* Urgency */}
+              <ul className="mt-6 flex flex-col gap-2">
+                {urgencyPoints.map((u) => {
+                  const Icon = u.icon;
+                  return (
+                    <li
+                      key={u.text}
+                      className="inline-flex items-center gap-2.5 text-sm text-muted-foreground"
+                    >
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                        <Icon className="h-3.5 w-3.5" />
+                      </span>
+                      {u.text}
+                    </li>
+                  );
+                })}
+              </ul>
+
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link
-                  to="/inscricao"
-                  className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground glow-primary transition-transform hover:-translate-y-0.5"
-                >
-                  Começar gratuitamente
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-                <Link
-                  to="/trilhas"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-medium text-foreground backdrop-blur transition-colors hover:bg-white/10"
-                >
-                  Explorar trilhas
-                </Link>
+                <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
+                <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
               </div>
 
-              {/* Hero stats */}
-              <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4">
+              <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4">
                 {heroStats.map((s) => (
                   <div key={s.label} className="bg-background/40 p-4 backdrop-blur">
                     <div className="font-display text-2xl font-semibold text-gradient">
@@ -137,15 +246,15 @@ function Index() {
               </div>
             </div>
 
-            {/* Premium platform mockup */}
-            <div className="relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
+            {/* Premium platform mockup — 30% larger, stronger contrast */}
+            <div className="relative animate-fade-up lg:scale-[1.08] lg:origin-left" style={{ animationDelay: "0.2s" }}>
               <div
-                className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/30 via-accent/20 to-transparent blur-2xl"
+                className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-primary/45 via-accent/30 to-transparent blur-3xl"
                 aria-hidden
               />
-              <div className="relative rounded-3xl border border-white/10 bg-card/80 p-5 backdrop-blur-xl glow-primary">
+              <div className="relative rounded-[1.75rem] border border-white/15 bg-card/90 p-6 sm:p-7 backdrop-blur-xl glow-primary">
                 {/* window chrome */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div className="flex items-center gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                     <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
@@ -156,38 +265,46 @@ function Index() {
                   </span>
                 </div>
 
-                {/* greeting + XP */}
-                <div className="mt-4 flex items-center justify-between">
+                {/* greeting + XP — bigger */}
+                <div className="mt-5 flex items-center justify-between">
                   <div>
                     <div className="text-xs text-muted-foreground">Bom dia, Ana</div>
-                    <div className="mt-1 font-display text-lg font-semibold">Nível 7 · Explorer</div>
+                    <div className="mt-1 font-display text-xl font-semibold">
+                      Nível 7 · Explorer
+                    </div>
                   </div>
-                  <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <div className="rounded-full border border-primary/40 bg-primary/15 px-4 py-1.5 text-sm font-bold text-primary ring-glow">
                     2.480 XP
                   </div>
                 </div>
 
-                {/* XP bar */}
-                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
-                  <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-primary to-accent" />
+                {/* XP bar — thicker */}
+                <div className="mt-4">
+                  <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
+                    <span>Progresso para nível 8</span>
+                    <span className="text-primary">68%</span>
+                  </div>
+                  <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-white/5">
+                    <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-primary to-accent shadow-[0_0_20px_rgba(120,140,255,0.6)]" />
+                  </div>
                 </div>
 
-                {/* progress rows */}
-                <div className="mt-5 space-y-3">
+                {/* progress rows — more prominent */}
+                <div className="mt-6 space-y-4">
                   <ProgressRow label="IA Aplicada · Módulo 4" value={72} />
                   <ProgressRow label="Automação com n8n" value={48} />
                   <ProgressRow label="Marketing com IA" value={91} />
                 </div>
 
                 {/* bottom widgets */}
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3.5">
                     <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                       <Award className="h-3 w-3 text-accent" /> Certificado
                     </div>
                     <div className="mt-1.5 text-sm font-semibold">Prompt Eng. Pro</div>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3.5">
                     <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                       <Trophy className="h-3 w-3 text-primary" /> Ranking
                     </div>
@@ -216,7 +333,7 @@ function Index() {
       </section>
 
       {/* ============ SOCIAL PROOF ============ */}
-      <section className="relative border-y border-white/5 bg-surface/30 py-12 backdrop-blur">
+      <section className="relative border-y border-white/5 bg-surface/30 py-14 backdrop-blur">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {socialProof.map((s) => {
@@ -238,7 +355,7 @@ function Index() {
         </div>
       </section>
 
-      {/* ============ TRILHAS — horizontal scroll ============ */}
+      {/* ============ TRILHAS ============ */}
       <section className="relative overflow-hidden py-20 sm:py-28">
         <div className="absolute inset-0 tech-grid opacity-30" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6">
@@ -251,22 +368,19 @@ function Index() {
                 Aprenda o que <span className="text-gradient">move o mercado</span>
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Da IA aplicada à automação. Cada trilha forma você com prática real e projetos publicáveis.
+                Trilhas práticas com foco em resultado — automação, IA aplicada, renda e novos negócios.
               </p>
             </div>
-            <Link
-              to="/trilhas"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground hover:bg-white/10"
-            >
+            <SecondaryCTA to="/trilhas" className="h-11 px-5 text-sm">
               Ver todas <ArrowUpRight className="h-4 w-4" />
-            </Link>
+            </SecondaryCTA>
           </div>
 
-          {/* Horizontal scroll on mobile, grid on desktop */}
           <div className="mt-12 -mx-6 overflow-x-auto px-6 pb-4 lg:mx-0 lg:overflow-visible lg:px-0">
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
+                const benefit = trackBenefits[t.slug] ?? t.desc;
                 return (
                   <Link
                     key={t.slug}
@@ -291,7 +405,7 @@ function Index() {
                         {t.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {t.desc}
+                        {benefit}
                       </p>
                       <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
                         <span>{t.modules} cursos</span>
@@ -306,8 +420,46 @@ function Index() {
         </div>
       </section>
 
+      {/* ============ CAPABILITIES — O que você será capaz de fazer ============ */}
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-20 sm:py-28">
+        <div
+          className="absolute left-1/3 top-0 h-[400px] w-[600px] rounded-full bg-primary/10 blur-[140px]"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
+              Resultados práticos
+            </div>
+            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              O que você <span className="text-gradient">será capaz</span> de fazer
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Aplicações reais que você desenvolve ao longo das trilhas.
+            </p>
+          </div>
+
+          <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {capabilities.map((c) => {
+              const Icon = c.icon;
+              return (
+                <div
+                  key={c.label}
+                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05]"
+                >
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
+                    <Icon className="h-4.5 w-4.5" />
+                  </span>
+                  <span className="text-sm font-medium text-foreground">{c.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ============ DEMO — Platform showcase ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/40 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-b border-white/5 bg-surface/40 py-20 sm:py-28">
         <div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"
           aria-hidden
@@ -389,14 +541,39 @@ function Index() {
       </section>
 
       {/* ============ INSTRUCTOR ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-24 sm:py-32">
         <div
           className="absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-accent/15 blur-[140px]"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
-            <div>
+          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
+            {/* Visual portrait card — bigger, first on desktop */}
+            <div className="relative order-2 lg:order-1">
+              <div
+                className="absolute -inset-8 rounded-[2rem] bg-gradient-to-br from-primary/35 via-accent/25 to-transparent blur-3xl"
+                aria-hidden
+              />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-primary/25 via-card/85 to-accent/25 p-8 backdrop-blur-xl">
+                <div className="flex h-full flex-col justify-between">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                    <Sparkles className="h-3.5 w-3.5 text-primary" />
+                    Fundador · CEO
+                  </div>
+                  <div className="flex h-60 w-60 items-center justify-center self-center rounded-full bg-gradient-to-br from-primary to-accent text-8xl font-display font-bold text-primary-foreground ring-glow">
+                    FC
+                  </div>
+                  <div>
+                    <div className="font-display text-2xl font-semibold leading-snug">
+                      "Tecnologia muda a vida de quem aprende a aplicar."
+                    </div>
+                    <div className="mt-2 text-sm text-muted-foreground">— Fernando Cabral</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
                 Instrutor
               </div>
@@ -407,27 +584,26 @@ function Index() {
                 Especialista em IA, SaaS e Educação Tecnológica
               </p>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Mais de uma década construindo produtos digitais, automações e estratégias com IA. Mentor de centenas de profissionais e fundador da FCIA Academy.
+                Mais de uma década construindo produtos digitais, automações e estratégias com IA.
+                Mentor de centenas de profissionais e fundador da FCIA Academy.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-2">
-                {[
-                  "IA Aplicada",
-                  "SaaS",
-                  "Automação",
-                  "Branding Estratégico",
-                  "Educação Tech",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* Reasons block */}
+              <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
+                <div className="font-display text-base font-semibold">
+                  Por que aprender com Fernando Cabral?
+                </div>
+                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                  {instructorReasons.map((r) => (
+                    <li key={r} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{r}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+              <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                 {instructorMetrics.map((m) => (
                   <div key={m.label} className="bg-background/50 p-5">
                     <div className="font-display text-2xl font-semibold text-gradient">
@@ -438,31 +614,6 @@ function Index() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Visual portrait card */}
-            <div className="relative">
-              <div
-                className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-primary/30 via-accent/20 to-transparent blur-2xl"
-                aria-hidden
-              />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-primary/20 via-card/80 to-accent/20 p-8 backdrop-blur-xl">
-                <div className="flex h-full flex-col justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                    <Sparkles className="h-3.5 w-3.5 text-primary" />
-                    Fundador · CEO
-                  </div>
-                  <div className="flex h-48 w-48 items-center justify-center self-center rounded-full bg-gradient-to-br from-primary to-accent text-7xl font-display font-bold text-primary-foreground ring-glow">
-                    FC
-                  </div>
-                  <div>
-                    <div className="font-display text-2xl font-semibold">
-                      "Tecnologia muda a vida de quem aprende a aplicar."
-                    </div>
-                    <div className="mt-2 text-sm text-muted-foreground">— Fernando Cabral</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -487,32 +638,23 @@ function Index() {
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
             <Brain className="h-3 w-3" />
-            Próxima geração de profissionais
+            O futuro chegou — escolha seu lado
           </div>
 
           <h2 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            Pronto para dominar{" "}
-            <span className="text-gradient">IA e tecnologia aplicada?</span>
+            O mercado está mudando.
+            <br />
+            <span className="text-gradient">Você vai acompanhar ou liderar?</span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Comece gratuitamente hoje e acelere sua evolução profissional com a plataforma que coloca você na frente da próxima revolução tecnológica.
+            Comece gratuitamente e desenvolva habilidades que já estão transformando empresas,
+            profissionais e negócios.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/inscricao"
-              className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-primary-foreground glow-primary transition-transform hover:-translate-y-0.5"
-            >
-              Começar agora
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-            <Link
-              to="/trilhas"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-4 text-base font-medium text-foreground backdrop-blur transition-colors hover:bg-white/10"
-            >
-              Ver trilhas
-            </Link>
+            <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
+            <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
@@ -536,12 +678,12 @@ function ProgressRow({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span>{label}</span>
+        <span className="font-medium text-foreground/90">{label}</span>
         <span className="font-mono text-primary">{value}%</span>
       </div>
-      <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/5">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+          className="h-full rounded-full bg-gradient-to-r from-primary to-accent shadow-[0_0_16px_rgba(120,140,255,0.45)]"
           style={{ width: `${value}%` }}
         />
       </div>
@@ -555,7 +697,7 @@ function DemoCard({
   title,
   desc,
 }: {
-  icon: typeof Play;
+  icon: LucideIcon;
   tag: string;
   title: string;
   desc: string;
