@@ -1,11 +1,12 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen, Award, Zap } from "lucide-react";
+import { LogOut, LayoutDashboard, Sparkles, User2, UserCog, BookOpen, Award, Zap, Shield } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { registerDailyLogin } from "@/lib/gamification";
+import { isAdminQuery } from "@/lib/admin-api";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,13 +16,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const nav = [
+const baseNav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/trilhas", label: "Trilhas", icon: BookOpen },
   { to: "/evolucao", label: "Evolução", icon: Zap },
   { to: "/certificados", label: "Certificados", icon: Award },
   { to: "/profile", label: "Perfil", icon: UserCog },
 ] as const;
+const adminNav = { to: "/admin", label: "Admin", icon: Shield } as const;
 
 interface Profile {
   full_name: string | null;
