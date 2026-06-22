@@ -382,22 +382,24 @@ function Index() {
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
-                const benefit = trackBenefits[t.slug] ?? t.desc;
+                const benefit = trackBenefits[t.slug];
+                const desc = benefit?.desc ?? t.desc;
+                const outcome = benefit?.outcome;
                 return (
                   <Link
                     key={t.slug}
                     to="/cursos/$slug"
                     params={{ slug: t.slug }}
-                    className="group relative w-[280px] shrink-0 lg:w-auto"
+                    className="group relative w-[320px] shrink-0 lg:w-auto"
                   >
                     <div
                       className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/40 via-accent/30 to-transparent opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100"
                       aria-hidden
                     />
-                    <div className="relative h-full rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40">
+                    <div className="relative flex h-full flex-col rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
-                          <Icon className="h-5 w-5" />
+                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary ring-1 ring-primary/30 transition-all group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground">
+                          <Icon className="h-6 w-6" />
                         </span>
                         <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                           {t.tag}
@@ -406,12 +408,20 @@ function Index() {
                       <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">
                         {t.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {benefit}
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                        {desc}
                       </p>
-                      <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
+                      {outcome && (
+                        <div className="mt-4 flex items-start gap-2 rounded-xl border border-primary/20 bg-primary/5 p-3">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                          <span className="text-xs font-medium leading-relaxed text-foreground/90">
+                            {outcome}
+                          </span>
+                        </div>
+                      )}
+                      <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
                         <span>{t.modules} cursos</span>
-                        <span className="text-primary">{t.hours}</span>
+                        <span className="font-semibold text-primary">{t.hours}</span>
                       </div>
                     </div>
                   </Link>
