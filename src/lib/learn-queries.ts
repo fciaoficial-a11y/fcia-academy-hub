@@ -10,9 +10,11 @@ export type ModuleRow = {
   content_type: "video" | "pdf" | "text";
   content_url: string | null;
   content_text: string | null;
+  video_url: string | null;
   duration_minutes: number;
   sort_order: number;
 };
+
 
 export type CourseDetail = {
   id: string;
