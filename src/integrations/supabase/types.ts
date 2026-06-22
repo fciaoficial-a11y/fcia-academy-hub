@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      courses: {
+        Row: {
+          cover_url: string | null
+          created_at: string
+          description: string
+          duration_minutes: number
+          id: string
+          is_published: boolean
+          level: string
+          slug: string
+          sort_order: number
+          title: string
+          track_id: string
+          updated_at: string
+        }
+        Insert: {
+          cover_url?: string | null
+          created_at?: string
+          description: string
+          duration_minutes?: number
+          id?: string
+          is_published?: boolean
+          level?: string
+          slug: string
+          sort_order?: number
+          title: string
+          track_id: string
+          updated_at?: string
+        }
+        Update: {
+          cover_url?: string | null
+          created_at?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          is_published?: boolean
+          level?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          track_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -38,15 +91,93 @@ export type Database = {
         }
         Relationships: []
       }
+      tracks: {
+        Row: {
+          created_at: string
+          description: string
+          hours: string
+          icon: string
+          id: string
+          is_published: boolean
+          level: string
+          modules: number
+          outcomes: string[]
+          slug: string
+          sort_order: number
+          tag: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          hours: string
+          icon?: string
+          id?: string
+          is_published?: boolean
+          level: string
+          modules?: number
+          outcomes?: string[]
+          slug: string
+          sort_order?: number
+          tag: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          hours?: string
+          icon?: string
+          id?: string
+          is_published?: boolean
+          level?: string
+          modules?: number
+          outcomes?: string[]
+          slug?: string
+          sort_order?: number
+          tag?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "aluno"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -173,6 +304,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "aluno"],
+    },
   },
 } as const
