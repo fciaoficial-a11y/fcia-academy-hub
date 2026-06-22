@@ -24,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ValidarCertificadoCodigoRouteImport } from './routes/validar-certificado.$codigo'
 import { Route as CursosSlugRouteImport } from './routes/cursos.$slug'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedEvolucaoRouteImport } from './routes/_authenticated/evolucao'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedQuizModuleIdRouteImport } from './routes/_authenticated/quiz.$moduleId'
@@ -105,6 +106,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEvolucaoRoute = AuthenticatedEvolucaoRouteImport.update({
+  id: '/evolucao',
+  path: '/evolucao',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/turmas': typeof TurmasRoute
   '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/evolucao': typeof AuthenticatedEvolucaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
   '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
@@ -169,6 +176,7 @@ export interface FileRoutesByTo {
   '/turmas': typeof TurmasRoute
   '/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/evolucao': typeof AuthenticatedEvolucaoRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
   '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/turmas': typeof TurmasRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/evolucao': typeof AuthenticatedEvolucaoRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/cursos/$slug': typeof CursosSlugRoute
   '/validar-certificado/$codigo': typeof ValidarCertificadoCodigoRoute
@@ -215,6 +224,7 @@ export interface FileRouteTypes {
     | '/turmas'
     | '/certificados'
     | '/dashboard'
+    | '/evolucao'
     | '/profile'
     | '/cursos/$slug'
     | '/validar-certificado/$codigo'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/turmas'
     | '/certificados'
     | '/dashboard'
+    | '/evolucao'
     | '/profile'
     | '/cursos/$slug'
     | '/validar-certificado/$codigo'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/turmas'
     | '/_authenticated/certificados'
     | '/_authenticated/dashboard'
+    | '/_authenticated/evolucao'
     | '/_authenticated/profile'
     | '/cursos/$slug'
     | '/validar-certificado/$codigo'
@@ -389,6 +401,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/evolucao': {
+      id: '/_authenticated/evolucao'
+      path: '/evolucao'
+      fullPath: '/evolucao'
+      preLoaderRoute: typeof AuthenticatedEvolucaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -444,6 +463,7 @@ const AuthenticatedCertificadosRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEvolucaoRoute: typeof AuthenticatedEvolucaoRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedCursoSlugRoute: typeof AuthenticatedCursoSlugRoute
   AuthenticatedQuizModuleIdRoute: typeof AuthenticatedQuizModuleIdRoute
@@ -452,6 +472,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEvolucaoRoute: AuthenticatedEvolucaoRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedCursoSlugRoute: AuthenticatedCursoSlugRoute,
   AuthenticatedQuizModuleIdRoute: AuthenticatedQuizModuleIdRoute,
