@@ -47,6 +47,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         .eq("id", userData.user.id)
         .maybeSingle();
       if (mounted) setProfile(data ?? null);
+      registerDailyLogin()
+        .then((res) => {
+          if (res && res.awarded > 0) {
+            toast.success(`+${res.awarded} XP por login diário! 🔥 Streak: ${res.new_streak}`);
+          }
+        })
+        .catch(() => {});
     })();
     return () => {
       mounted = false;
