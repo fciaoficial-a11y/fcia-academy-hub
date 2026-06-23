@@ -172,6 +172,44 @@ const instructorReasons = [
 ];
 
 function Index() {
+  const tracksScrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = tracksScrollerRef.current;
+    if (!el) return;
+    // Only autoplay on mobile/tablet (scrollable). Desktop uses a grid (no overflow).
+    const mq = window.matchMedia("(min-width: 1024px)");
+    if (mq.matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let paused = false;
+    const onPause = () => {
+      paused = true;
+    };
+    const onResume = () => {
+      paused = false;
+    };
+    el.addEventListener("pointerdown", onPause);
+    el.addEventListener("pointerup", onResume);
+    el.addEventListener("mouseleave", onResume);
+
+    const interval = window.setInterval(() => {
+      if (paused) return;
+      const card = el.querySelector<HTMLElement>("[data-track-card]");
+      const step = card ? card.offsetWidth + 20 : 320;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const next = el.scrollLeft + step >= maxScroll - 4 ? 0 : el.scrollLeft + step;
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }, 3000);
+
+    return () => {
+      window.clearInterval(interval);
+      el.removeEventListener("pointerdown", onPause);
+      el.removeEventListener("pointerup", onResume);
+      el.removeEventListener("mouseleave", onResume);
+    };
+  }, []);
+
   return (
     <>
       {/* ============ HERO ============ */}
