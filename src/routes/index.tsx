@@ -718,7 +718,7 @@ function DemoCard({
   desc: string;
 }) {
   return (
-    <div className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40 lg:w-auto lg:shrink">
+    <div data-demo-card className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40 lg:w-auto lg:shrink">
       <div
         className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-accent/20 blur-3xl transition-all group-hover:bg-primary/30"
         aria-hidden
