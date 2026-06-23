@@ -8,6 +8,7 @@
 -- Source: 20260622190205_4b71290e-dde7-441a-be98-0da32a7b9b29.sql
 -- ============================================================
 
+
 -- profiles
 CREATE TABLE public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -81,6 +82,7 @@ CREATE TRIGGER on_auth_user_created
 -- Source: 20260622190218_7f3b862f-c01b-4f33-997a-2a80e6591dfe.sql
 -- ============================================================
 
+
 REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authenticated;
 REVOKE EXECUTE ON FUNCTION public.set_updated_at() FROM PUBLIC, anon, authenticated;
 
@@ -88,6 +90,7 @@ REVOKE EXECUTE ON FUNCTION public.set_updated_at() FROM PUBLIC, anon, authentica
 -- ============================================================
 -- Source: 20260622192020_784b644d-9e09-47d8-ac41-6fed8b85a3f5.sql
 -- ============================================================
+
 
 -- ============== ROLES ==============
 CREATE TYPE public.app_role AS ENUM ('admin', 'aluno');
@@ -233,38 +236,15 @@ CREATE POLICY "Users update own avatar" ON storage.objects
 
 CREATE POLICY "Users delete own avatar" ON storage.objects
   FOR DELETE TO authenticated
-  USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);-- [DML removido] -- ============== SEED ==============
+  USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);-- [DML removido] INSERT INTO public.tracks (slug, title, description, tag, level, hours, modules, icon, out
+-- [DML removido] WITH t AS (SELECT id, slug FROM public.tracks)
 
-
--- Courses seed (3 per track)
-WITH t AS (SELECT id, slug FROM public.tracks)
-INSERT INTO public.courses (track_id, slug, title, description, duration_minutes, level, sort_order)
-SELECT t.id, c.slug, c.title, c.description, c.dur, c.lvl, c.ord FROM t JOIN (VALUES
-  ('ia-aplicada','ia-fundamentos','Fundamentos de IA Generativa','Entenda LLMs, embeddings e como a IA generativa funciona na prática.',240,'Iniciante',1),
-  ('ia-aplicada','prompts-avancados','Engenharia de Prompts Avançada','Domine frameworks de prompts para resultados consistentes.',300,'Intermediário',2),
-  ('ia-aplicada','agentes-ia','Agentes Autônomos com IA','Construa agentes que executam tarefas reais com ferramentas.',420,'Avançado',3),
-  ('dev-moderno','react-typescript','React + TypeScript do Zero','Domine a stack mais usada do mercado moderno.',600,'Iniciante',1),
-  ('dev-moderno','fullstack-supabase','Full-Stack com Supabase','Banco, auth e APIs sem servidor próprio.',540,'Intermediário',2),
-  ('dev-moderno','deploy-edge','Deploy Edge e Performance','Publique apps rápidos com Cloudflare e Vercel.',360,'Avançado',3),
-  ('empreendedorismo','validacao-oferta','Validação de Oferta em 30 dias','Teste sua ideia com clientes reais antes de construir.',240,'Iniciante',1),
-  ('empreendedorismo','funil-aquisicao','Funil de Aquisição Moderno','Estruture marketing, vendas e retenção com IA.',300,'Intermediário',2),
-  ('empreendedorismo','operacao-enxuta','Operação Enxuta com IA','Automatize processos do seu negócio digital.',360,'Avançado',3),
-  ('renda-com-ia','primeiros-clientes','Primeiros Clientes com IA','Conquiste seus primeiros clientes pagantes em 30 dias.',180,'Iniciante',1),
-  ('renda-com-ia','servicos-produtizados','Serviços Produtizados','Transforme serviços em ofertas escaláveis.',240,'Intermediário',2),
-  ('renda-com-ia','produtos-digitais','Produtos Digitais com IA','Crie e venda produtos digitais gerados com IA.',300,'Avançado',3),
-  ('profissional-do-futuro','posicionamento','Posicionamento Profissional','Reescreva sua narrativa para o mercado atual.',180,'Iniciante',1),
-  ('profissional-do-futuro','dados-ia','Dados e IA no Trabalho','Use dados e IA para decisões diárias.',360,'Intermediário',2),
-  ('profissional-do-futuro','entrevistas-seniores','Entrevistas em Vagas Sêniores','Prepare-se para processos seletivos exigentes.',240,'Avançado',3),
-  ('inovacao','mentalidade-produto','Mentalidade de Produto','Pense como product manager em qualquer função.',180,'Iniciante',1),
-  ('inovacao','discovery-metricas','Discovery e Métricas de Impacto','Descubra problemas certos e meça resultados.',240,'Intermediário',2),
-  ('inovacao','lideranca-squads','Liderança de Squads','Lidere times de alta performance.',300,'Avançado',3)
-) AS c(track_slug, slug, title, description, dur, lvl, ord)
-ON t.slug = c.track_slug;
 
 
 -- ============================================================
 -- Source: 20260622192040_f1828d16-eb44-42ec-b1f9-8e425ad95607.sql
 -- ============================================================
+
 
 REVOKE EXECUTE ON FUNCTION public.has_role(UUID, public.app_role) FROM PUBLIC, anon, authenticated;
 REVOKE EXECUTE ON FUNCTION public.assign_default_role() FROM PUBLIC, anon, authenticated;
@@ -274,6 +254,7 @@ REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authentic
 -- ============================================================
 -- Source: 20260622192832_61e6b80f-4a40-4b23-b035-553216b1a2ee.sql
 -- ============================================================
+
 
 CREATE TABLE public.modules (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -339,6 +320,7 @@ CREATE TRIGGER set_module_progress_updated_at BEFORE UPDATE ON public.module_pro
 -- Source: 20260622194625_4834ef31-214b-45ec-b95d-c27281255ea7.sql
 -- ============================================================
 
+
 -- Questions table
 CREATE TABLE public.questions (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -400,15 +382,16 @@ CREATE POLICY "Users view own attempts"
 
 CREATE POLICY "Users insert own attempts"
   ON public.quiz_attempts FOR INSERT TO authenticated
-  WITH CHECK (auth.uid() = user_id);-- [DML removido] -- Seed sample questions for each existing module
--- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer
--- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer
+  WITH CHECK (auth.uid() = user_id);-- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanat
+-- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanat
+-- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanat
 
 
 
 -- ============================================================
 -- Source: 20260622195006_d6fb6e7b-b1e5-4f5c-9dea-87ff6abbc5f2.sql
 -- ============================================================
+
 
 CREATE TABLE public.certificates (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -480,13 +463,14 @@ AS $$
   LIMIT 1;
 $$;
 
-GRANT EXECUTE ON FUNCTION public.validate_certificate(TEXT) TO anon, authenticated;-- [DML removido] -- Backfill: emit certificates for users who already passed quizzes
+GRANT EXECUTE ON FUNCTION public.validate_certificate(TEXT) TO anon, authenticated;-- [DML removido] INSERT INTO public.certificates (user_id, course_id)
 
 
 
 -- ============================================================
 -- Source: 20260622203327_25bbbb14-4a7f-4ff4-a6e1-0a7d8d2556e4.sql
 -- ============================================================
+
 
 -- Profiles gamification columns
 ALTER TABLE public.profiles
@@ -714,13 +698,14 @@ BEGIN
   RETURN QUERY SELECT v_awarded, v_streak, (SELECT xp FROM public.profiles WHERE id = v_user);
 END;
 $$;
-GRANT EXECUTE ON FUNCTION public.register_daily_login() TO authenticated;-- [DML removido] -- Seed achievements
+GRANT EXECUTE ON FUNCTION public.register_daily_login() TO authenticated;-- [DML removido] INSERT INTO public.achievements (code, title, description, icon, xp_reward, sort_order) VA
 
 
 
 -- ============================================================
 -- Source: 20260622203857_6282114c-caff-4cf2-97d3-1caafa189253.sql
 -- ============================================================
+
 
 -- Extra profile columns
 ALTER TABLE public.profiles
@@ -837,6 +822,7 @@ GRANT EXECUTE ON FUNCTION public.admin_metrics() TO authenticated;
 -- Source: 20260622203919_f3250617-0685-40a9-b3e9-c2df72e0335c.sql
 -- ============================================================
 
+
 CREATE POLICY "Admins manage course-assets" ON storage.objects FOR ALL TO authenticated
   USING (bucket_id = 'course-assets' AND public.has_role(auth.uid(),'admin'))
   WITH CHECK (bucket_id = 'course-assets' AND public.has_role(auth.uid(),'admin'));
@@ -848,6 +834,7 @@ CREATE POLICY "Authenticated read course-assets" ON storage.objects FOR SELECT T
 -- ============================================================
 -- Source: 20260622205259_5cd6a4ea-fdb3-47ca-8dc5-7bc84b609783.sql
 -- ============================================================
+
 
 -- Plans table
 CREATE TABLE public.plans (
@@ -897,7 +884,7 @@ CREATE TRIGGER trg_subs_updated BEFORE UPDATE ON public.subscriptions
 
 -- Mark tracks with required plan tier
 ALTER TABLE public.tracks ADD COLUMN IF NOT EXISTS required_plan TEXT NOT NULL DEFAULT 'free'
-  CHECK (required_plan IN ('free','starter','pro','expert'));-- [DML removido] -- Seed plans
+  CHECK (required_plan IN ('free','starter','pro','expert'));-- [DML removido] INSERT INTO public.plans (id, name, price, features, sort_order) VALUES
 
 
 -- Helper: get current plan id for a user
@@ -959,13 +946,14 @@ $$;
 DROP TRIGGER IF EXISTS on_auth_user_assign_free_plan ON auth.users;
 CREATE TRIGGER on_auth_user_assign_free_plan
 AFTER INSERT ON auth.users
-FOR EACH ROW EXECUTE FUNCTION public.assign_free_plan();-- [DML removido] -- Backfill: existing users get free plan
+FOR EACH ROW EXECUTE FUNCTION public.assign_free_plan();-- [DML removido] INSERT INTO public.subscriptions (user_id, plan_id, status)
 
 
 
 -- ============================================================
 -- Source: 20260622232749_e8582ecf-2705-4d5a-a182-cde2f655148f.sql
 -- ============================================================
+
 
 ALTER TABLE public.modules ADD COLUMN IF NOT EXISTS video_url TEXT;
 
@@ -990,6 +978,7 @@ USING (bucket_id = 'course-videos');
 -- Source: 20260622234242_39077966-fd18-4b05-a0a9-a1ec69e2205e.sql
 -- ============================================================
 
+
 -- 1) Auto-promote specific email to admin on signup
 CREATE OR REPLACE FUNCTION public.auto_promote_admin()
 RETURNS trigger
@@ -1010,8 +999,8 @@ DROP TRIGGER IF EXISTS on_auth_user_created_promote_admin ON auth.users;
 CREATE TRIGGER on_auth_user_created_promote_admin
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.auto_promote_admin();-- [DML removido] INSERT INTO public.user_roles (user_id, role)
--- [DML removido] -- 2) Seed demo data (idempotent: wipe demo slugs first)
--- [DML removido] DELETE FROM public.modules WHERE course_id IN (SELECT id FROM public.courses WHE
+-- [DML removido] DELETE FROM public.questions WHERE module_id IN (
+-- [DML removido] DELETE FROM public.modules WHERE course_id IN (SELECT id FROM public.courses WHERE slug = 
 -- [DML removido] DELETE FROM public.courses WHERE slug = 'curso-demo-e2e';
 -- [DML removido] DELETE FROM public.tracks WHERE slug = 'trilha-demo-e2e';
 
@@ -1066,4 +1055,5 @@ $seed$;
 -- ============================================================
 -- Source: 20260623004231_d9e536a9-82b1-4add-9ed1-61637b5f291a.sql
 -- ============================================================
+
 GRANT EXECUTE ON FUNCTION public.has_role(uuid, app_role) TO authenticated, anon;
