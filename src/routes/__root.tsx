@@ -157,6 +157,7 @@ function RootComponent() {
           <Outlet />
         </main>
         {!hideChrome && <SiteFooter />}
+        {!hideChrome && !hideStickyCTA && <div aria-hidden className="h-20 lg:hidden" />}
       </div>
       {!hideChrome && !hideStickyCTA && <MobileStickyCTA />}
       <Toaster />
