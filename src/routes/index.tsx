@@ -473,7 +473,7 @@ function Index() {
       </section>
 
       {/* ============ DEMO — Platform showcase ============ */}
-      <section className="relative overflow-hidden border-b border-white/5 bg-surface/40 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-b border-white/5 bg-surface/40 py-12 sm:py-20 lg:py-28">
         <div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"
           aria-hidden
@@ -483,15 +483,15 @@ function Index() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
               Plataforma
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
               Veja a FCIA Academy <span className="text-gradient">em ação</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Dashboard, player, XP, certificados e ranking — uma experiência completa para aprender e evoluir.
+            <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
+              Dashboard, player, XP, certificados e ranking — experiência completa para evoluir.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <div className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
             <DemoCard
               icon={Play}
               tag="Player"
