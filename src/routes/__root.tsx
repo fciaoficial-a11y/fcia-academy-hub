@@ -158,6 +158,7 @@ function RootComponent() {
         </main>
         {!hideChrome && <SiteFooter />}
       </div>
+      {!hideChrome && !hideStickyCTA && <MobileStickyCTA />}
       <Toaster />
     </QueryClientProvider>
   );
