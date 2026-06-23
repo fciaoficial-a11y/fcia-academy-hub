@@ -198,19 +198,17 @@ function Index() {
                 Plataforma de IA · Tecnologia · Automação
               </div>
 
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.75rem]">
-                Domine <span className="text-gradient">IA</span> antes
-                <br />que ela transforme
-                <br />seu mercado.
+              <h1 className="mt-4 font-display text-[2.5rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.75rem]">
+                Domine <span className="text-gradient">IA</span> antes que ela transforme seu mercado.
               </h1>
 
-              <p className="mt-6 max-w-xl text-xl leading-relaxed text-foreground/85">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-foreground/85 sm:text-xl">
                 Aprenda a criar automações, agentes inteligentes, conteúdo e soluções digitais
-                que geram <span className="text-foreground font-medium">resultados reais</span> para profissionais e empresas.
+                que geram <span className="text-foreground font-medium">resultados reais</span>.
               </p>
 
-              {/* Urgency */}
-              <ul className="mt-6 flex flex-col gap-2">
+              {/* Urgency — hidden on mobile to reduce height */}
+              <ul className="mt-5 hidden flex-col gap-2 sm:flex">
                 {urgencyPoints.map((u) => {
                   const Icon = u.icon;
                   return (
@@ -227,18 +225,18 @@ function Index() {
                 })}
               </ul>
 
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <PrimaryCTA to="/inscricao" className="h-14 px-9 text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
-                <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
+              <div className="mt-5 flex flex-wrap items-center gap-3 sm:mt-10">
+                <PrimaryCTA to="/inscricao" className="h-12 w-full px-7 text-sm sm:h-14 sm:w-auto sm:px-9 sm:text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
+                <SecondaryCTA to="/trilhas" className="hidden sm:inline-flex">Explorar trilhas</SecondaryCTA>
               </div>
 
-              <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4">
+              <div className="mt-6 grid grid-cols-4 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:mt-10">
                 {heroStats.map((s) => (
-                  <div key={s.label} className="bg-background/40 p-4 backdrop-blur">
-                    <div className="font-display text-2xl font-semibold text-gradient">
+                  <div key={s.label} className="bg-background/40 p-3 backdrop-blur sm:p-4">
+                    <div className="font-display text-xl font-semibold text-gradient sm:text-2xl">
                       {s.value}
                     </div>
-                    <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                    <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-[11px]">
                       {s.label}
                     </div>
                   </div>
