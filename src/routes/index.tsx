@@ -516,33 +516,33 @@ function Index() {
 
 
       {/* ============ INSTRUCTOR ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-24 sm:py-32">
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-12 sm:py-24 lg:py-32">
         <div
           className="absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-accent/15 blur-[140px]"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
-            {/* Visual portrait card — bigger, first on desktop */}
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+            {/* Visual portrait card — compact on mobile */}
             <div className="relative order-2 lg:order-1">
               <div
                 className="absolute -inset-8 rounded-[2rem] bg-gradient-to-br from-primary/35 via-accent/25 to-transparent blur-3xl"
                 aria-hidden
               />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-primary/25 via-card/85 to-accent/25 p-8 backdrop-blur-xl">
-                <div className="flex h-full flex-col justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-primary/25 via-card/85 to-accent/25 p-5 backdrop-blur-xl sm:p-8 lg:aspect-[4/5]">
+                <div className="flex h-full flex-col items-center gap-4 text-center sm:gap-6 lg:justify-between lg:text-left">
+                  <div className="hidden items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground lg:flex">
                     <Sparkles className="h-3.5 w-3.5 text-primary" />
                     Fundador · CEO
                   </div>
-                  <div className="flex h-60 w-60 items-center justify-center self-center rounded-full bg-gradient-to-br from-primary to-accent text-8xl font-display font-bold text-primary-foreground ring-glow">
+                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-5xl font-display font-bold text-primary-foreground ring-glow sm:h-40 sm:w-40 sm:text-6xl lg:h-60 lg:w-60 lg:text-8xl lg:self-center">
                     FC
                   </div>
                   <div>
-                    <div className="font-display text-2xl font-semibold leading-snug">
+                    <div className="font-display text-base font-semibold leading-snug sm:text-xl lg:text-2xl">
                       "Tecnologia muda a vida de quem aprende a aplicar."
                     </div>
-                    <div className="mt-2 text-sm text-muted-foreground">— Fernando Cabral</div>
+                    <div className="mt-2 text-xs text-muted-foreground sm:text-sm">— Fernando Cabral</div>
                   </div>
                 </div>
               </div>
@@ -552,23 +552,23 @@ function Index() {
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
                 Por que aprender comigo?
               </div>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
                 Fernando Cabral
               </h2>
-              <p className="mt-2 text-lg text-gradient font-medium">
+              <p className="mt-1 text-base text-gradient font-medium sm:mt-2 sm:text-lg">
                 Especialista em IA, SaaS e Educação Tecnológica
               </p>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-base">
                 Mais de uma década construindo produtos digitais, automações e estratégias com IA.
                 Mentor de centenas de profissionais e fundador da FCIA Academy.
               </p>
 
               {/* Reasons block */}
-              <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
-                <div className="font-display text-base font-semibold">
-                  Por que aprender com Fernando Cabral?
+              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur sm:mt-8 sm:p-6">
+                <div className="font-display text-sm font-semibold sm:text-base">
+                  Autoridades em
                 </div>
-                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                <ul className="mt-3 grid gap-2 sm:mt-4 sm:gap-2.5 sm:grid-cols-2">
                   {instructorReasons.map((r) => (
                     <li key={r} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -578,13 +578,13 @@ function Index() {
                 </ul>
               </div>
 
-              <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+              <div className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:mt-8">
                 {instructorMetrics.map((m) => (
-                  <div key={m.label} className="bg-background/50 p-5">
-                    <div className="font-display text-2xl font-semibold text-gradient">
+                  <div key={m.label} className="bg-background/50 p-3 sm:p-5">
+                    <div className="font-display text-xl font-semibold text-gradient sm:text-2xl">
                       {m.value}
                     </div>
-                    <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                    <div className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground sm:mt-1 sm:text-[11px]">
                       {m.label}
                     </div>
                   </div>
