@@ -424,6 +424,7 @@ function Index() {
                     key={t.slug}
                     to="/cursos/$slug"
                     params={{ slug: t.slug }}
+                    data-track-card
                     className="group relative w-[320px] shrink-0 lg:w-auto"
                   >
                     <div
