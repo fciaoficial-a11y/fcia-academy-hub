@@ -331,21 +331,21 @@ function Index() {
       </section>
 
       {/* ============ SOCIAL PROOF ============ */}
-      <section className="relative border-y border-white/5 bg-surface/30 py-14 backdrop-blur">
+      <section className="relative border-y border-white/5 bg-surface/30 py-8 backdrop-blur sm:py-14">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {socialProof.map((s) => {
               const Icon = s.icon;
               return (
                 <div
                   key={s.label}
-                  className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05]"
+                  className="group rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05] sm:rounded-2xl sm:p-5"
                 >
-                  <Icon className="h-5 w-5 text-primary transition-colors group-hover:text-accent" />
-                  <div className="mt-3 font-display text-3xl font-semibold text-gradient">
+                  <Icon className="h-4 w-4 text-primary transition-colors group-hover:text-accent sm:h-5 sm:w-5" />
+                  <div className="mt-2 font-display text-xl font-semibold text-gradient sm:mt-3 sm:text-3xl">
                     {s.value}
                   </div>
-                  <div className="mt-1 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-[11px] text-muted-foreground sm:mt-1 sm:text-xs">{s.label}</div>
                 </div>
               );
             })}
