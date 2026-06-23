@@ -137,7 +137,15 @@ function RootComponent() {
   const hideChrome =
     AUTH_ROUTES.includes(pathname) ||
     pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/profile");
+    pathname.startsWith("/profile") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/trilhas") ||
+    pathname.startsWith("/evolucao") ||
+    pathname.startsWith("/certificados") ||
+    pathname.startsWith("/planos") ||
+    pathname.startsWith("/settings") ||
+    pathname.startsWith("/quiz") ||
+    pathname.startsWith("/curso");
   const hideStickyCTA = HIDE_STICKY_PREFIXES.some((p) => pathname.startsWith(p));
 
   useEffect(() => {
