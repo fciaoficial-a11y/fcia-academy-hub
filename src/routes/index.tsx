@@ -599,7 +599,7 @@ function Index() {
       <FAQ />
 
       {/* ============ FINAL CTA ============ */}
-      <section className="relative overflow-hidden py-24 sm:py-32">
+      <section className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
         <div className="absolute inset-0 tech-grid opacity-40" aria-hidden />
         <div
           className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[160px] animate-pulse-glow"
@@ -616,20 +616,20 @@ function Index() {
             O futuro chegou — escolha seu lado
           </div>
 
-          <h2 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h2 className="mt-4 font-display text-3xl font-semibold leading-[1.08] tracking-tight sm:mt-6 sm:text-6xl lg:text-7xl">
             O mercado está mudando.
             <br />
             <span className="text-gradient">Você vai acompanhar ou liderar?</span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:mt-6 sm:text-lg">
             Comece gratuitamente e desenvolva habilidades que já estão transformando empresas,
             profissionais e negócios.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
-            <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+            <PrimaryCTA to="/inscricao" className="h-12 w-full sm:h-12 sm:w-auto">Começar gratuitamente</PrimaryCTA>
+            <SecondaryCTA to="/trilhas" className="hidden sm:inline-flex">Explorar trilhas</SecondaryCTA>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
