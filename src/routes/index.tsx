@@ -19,7 +19,7 @@ import {
   Coins,
   type LucideIcon,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { FAQ } from "@/components/site/FAQ";
 import { tracks } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
@@ -172,6 +172,44 @@ const instructorReasons = [
 ];
 
 function Index() {
+  const tracksScrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = tracksScrollerRef.current;
+    if (!el) return;
+    // Only autoplay on mobile/tablet (scrollable). Desktop uses a grid (no overflow).
+    const mq = window.matchMedia("(min-width: 1024px)");
+    if (mq.matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let paused = false;
+    const onPause = () => {
+      paused = true;
+    };
+    const onResume = () => {
+      paused = false;
+    };
+    el.addEventListener("pointerdown", onPause);
+    el.addEventListener("pointerup", onResume);
+    el.addEventListener("mouseleave", onResume);
+
+    const interval = window.setInterval(() => {
+      if (paused) return;
+      const card = el.querySelector<HTMLElement>("[data-track-card]");
+      const step = card ? card.offsetWidth + 20 : 320;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const next = el.scrollLeft + step >= maxScroll - 4 ? 0 : el.scrollLeft + step;
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }, 3000);
+
+    return () => {
+      window.clearInterval(interval);
+      el.removeEventListener("pointerdown", onPause);
+      el.removeEventListener("pointerup", onResume);
+      el.removeEventListener("mouseleave", onResume);
+    };
+  }, []);
+
   return (
     <>
       {/* ============ HERO ============ */}
@@ -374,7 +412,7 @@ function Index() {
             </SecondaryCTA>
           </div>
 
-          <div className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
+          <div ref={tracksScrollerRef} className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
@@ -386,6 +424,7 @@ function Index() {
                     key={t.slug}
                     to="/cursos/$slug"
                     params={{ slug: t.slug }}
+                    data-track-card
                     className="group relative w-[320px] shrink-0 lg:w-auto"
                   >
                     <div
