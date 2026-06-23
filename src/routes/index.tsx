@@ -186,8 +186,8 @@ function Index() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-16 sm:pt-24 lg:pb-32">
-          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
+        <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-10 sm:pt-16 lg:pb-32 lg:pt-24">
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             {/* Copy */}
             <div className="animate-fade-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
