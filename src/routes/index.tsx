@@ -531,7 +531,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
+          <div ref={demoScrollerRef} className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
             <DemoCard
               icon={Play}
               tag="Player"
