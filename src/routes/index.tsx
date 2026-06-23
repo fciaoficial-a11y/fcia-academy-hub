@@ -171,36 +171,29 @@ const instructorReasons = [
   "Metodologia própria baseada em aplicação prática",
 ];
 
-function Index() {
-  const tracksScrollerRef = useRef<HTMLDivElement>(null);
-
+function useMobileCarouselAutoplay(cardSelector: string, intervalMs = 3000) {
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const el = tracksScrollerRef.current;
+    const el = ref.current;
     if (!el) return;
-    // Only autoplay on mobile/tablet (scrollable). Desktop uses a grid (no overflow).
-    const mq = window.matchMedia("(min-width: 1024px)");
-    if (mq.matches) return;
+    if (window.matchMedia("(min-width: 1024px)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let paused = false;
-    const onPause = () => {
-      paused = true;
-    };
-    const onResume = () => {
-      paused = false;
-    };
+    const onPause = () => { paused = true; };
+    const onResume = () => { paused = false; };
     el.addEventListener("pointerdown", onPause);
     el.addEventListener("pointerup", onResume);
     el.addEventListener("mouseleave", onResume);
 
     const interval = window.setInterval(() => {
       if (paused) return;
-      const card = el.querySelector<HTMLElement>("[data-track-card]");
+      const card = el.querySelector<HTMLElement>(cardSelector);
       const step = card ? card.offsetWidth + 20 : 320;
       const maxScroll = el.scrollWidth - el.clientWidth;
       const next = el.scrollLeft + step >= maxScroll - 4 ? 0 : el.scrollLeft + step;
       el.scrollTo({ left: next, behavior: "smooth" });
-    }, 3000);
+    }, intervalMs);
 
     return () => {
       window.clearInterval(interval);
@@ -208,7 +201,15 @@ function Index() {
       el.removeEventListener("pointerup", onResume);
       el.removeEventListener("mouseleave", onResume);
     };
-  }, []);
+  }, [cardSelector, intervalMs]);
+  return ref;
+}
+
+function Index() {
+  const tracksScrollerRef = useMobileCarouselAutoplay("[data-track-card]");
+  const demoScrollerRef = useMobileCarouselAutoplay("[data-demo-card]");
+
+
 
   return (
     <>
@@ -530,7 +531,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
+          <div ref={demoScrollerRef} className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
             <DemoCard
               icon={Play}
               tag="Player"
@@ -717,7 +718,7 @@ function DemoCard({
   desc: string;
 }) {
   return (
-    <div className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40 lg:w-auto lg:shrink">
+    <div data-demo-card className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40 lg:w-auto lg:shrink">
       <div
         className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-accent/20 blur-3xl transition-all group-hover:bg-primary/30"
         aria-hidden
