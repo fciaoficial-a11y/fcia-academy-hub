@@ -245,7 +245,7 @@ function Index() {
             </div>
 
             {/* Premium platform mockup — 30% larger, stronger contrast */}
-            <div className="relative animate-fade-up lg:scale-[0.97] lg:origin-left" style={{ animationDelay: "0.2s" }}>
+            <div className="relative hidden animate-fade-up lg:block lg:scale-[0.97] lg:origin-left" style={{ animationDelay: "0.2s" }}>
               <div
                 className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-primary/45 via-accent/30 to-transparent blur-3xl"
                 aria-hidden
