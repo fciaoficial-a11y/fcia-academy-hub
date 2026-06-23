@@ -23,6 +23,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { FAQ } from "@/components/site/FAQ";
 import { tracks } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
+import fernandoCabralAsset from "@/assets/fernando-cabral.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -575,8 +576,13 @@ function Index() {
                     <Sparkles className="h-3.5 w-3.5 text-primary" />
                     Fundador · CEO
                   </div>
-                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-5xl font-display font-bold text-primary-foreground ring-glow sm:h-40 sm:w-40 sm:text-6xl lg:h-60 lg:w-60 lg:text-8xl lg:self-center">
-                    FC
+                  <div className="relative h-32 w-32 overflow-hidden rounded-full ring-glow ring-2 ring-primary/40 sm:h-40 sm:w-40 lg:h-60 lg:w-60 lg:self-center">
+                    <img
+                      src={fernandoCabralAsset.url}
+                      alt="Fernando Cabral, fundador e CEO da FCIA Academy"
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <div>
                     <div className="font-display text-base font-semibold leading-snug sm:text-xl lg:text-2xl">
