@@ -186,8 +186,8 @@ function Index() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-16 sm:pt-24 lg:pb-32">
-          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
+        <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-10 sm:pt-16 lg:pb-32 lg:pt-24">
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             {/* Copy */}
             <div className="animate-fade-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
@@ -198,19 +198,17 @@ function Index() {
                 Plataforma de IA · Tecnologia · Automação
               </div>
 
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.75rem]">
-                Domine <span className="text-gradient">IA</span> antes
-                <br />que ela transforme
-                <br />seu mercado.
+              <h1 className="mt-4 font-display text-[2.5rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.75rem]">
+                Domine <span className="text-gradient">IA</span> antes que ela transforme seu mercado.
               </h1>
 
-              <p className="mt-6 max-w-xl text-xl leading-relaxed text-foreground/85">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-foreground/85 sm:text-xl">
                 Aprenda a criar automações, agentes inteligentes, conteúdo e soluções digitais
-                que geram <span className="text-foreground font-medium">resultados reais</span> para profissionais e empresas.
+                que geram <span className="text-foreground font-medium">resultados reais</span>.
               </p>
 
-              {/* Urgency */}
-              <ul className="mt-6 flex flex-col gap-2">
+              {/* Urgency — hidden on mobile to reduce height */}
+              <ul className="mt-5 hidden flex-col gap-2 sm:flex">
                 {urgencyPoints.map((u) => {
                   const Icon = u.icon;
                   return (
@@ -227,18 +225,18 @@ function Index() {
                 })}
               </ul>
 
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <PrimaryCTA to="/inscricao" className="h-14 px-9 text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
-                <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
+              <div className="mt-5 flex flex-wrap items-center gap-3 sm:mt-10">
+                <PrimaryCTA to="/inscricao" className="h-12 w-full px-7 text-sm sm:h-14 sm:w-auto sm:px-9 sm:text-base shadow-2xl shadow-primary/30">Começar gratuitamente</PrimaryCTA>
+                <SecondaryCTA to="/trilhas" className="hidden sm:inline-flex">Explorar trilhas</SecondaryCTA>
               </div>
 
-              <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4">
+              <div className="mt-6 grid grid-cols-4 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:mt-10">
                 {heroStats.map((s) => (
-                  <div key={s.label} className="bg-background/40 p-4 backdrop-blur">
-                    <div className="font-display text-2xl font-semibold text-gradient">
+                  <div key={s.label} className="bg-background/40 p-3 backdrop-blur sm:p-4">
+                    <div className="font-display text-xl font-semibold text-gradient sm:text-2xl">
                       {s.value}
                     </div>
-                    <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                    <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-[11px]">
                       {s.label}
                     </div>
                   </div>
@@ -247,7 +245,7 @@ function Index() {
             </div>
 
             {/* Premium platform mockup — 30% larger, stronger contrast */}
-            <div className="relative animate-fade-up lg:scale-[0.97] lg:origin-left" style={{ animationDelay: "0.2s" }}>
+            <div className="relative hidden animate-fade-up lg:block lg:scale-[0.97] lg:origin-left" style={{ animationDelay: "0.2s" }}>
               <div
                 className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-primary/45 via-accent/30 to-transparent blur-3xl"
                 aria-hidden
@@ -333,21 +331,21 @@ function Index() {
       </section>
 
       {/* ============ SOCIAL PROOF ============ */}
-      <section className="relative border-y border-white/5 bg-surface/30 py-14 backdrop-blur">
+      <section className="relative border-y border-white/5 bg-surface/30 py-8 backdrop-blur sm:py-14">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {socialProof.map((s) => {
               const Icon = s.icon;
               return (
                 <div
                   key={s.label}
-                  className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05]"
+                  className="group rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/[0.05] sm:rounded-2xl sm:p-5"
                 >
-                  <Icon className="h-5 w-5 text-primary transition-colors group-hover:text-accent" />
-                  <div className="mt-3 font-display text-3xl font-semibold text-gradient">
+                  <Icon className="h-4 w-4 text-primary transition-colors group-hover:text-accent sm:h-5 sm:w-5" />
+                  <div className="mt-2 font-display text-xl font-semibold text-gradient sm:mt-3 sm:text-3xl">
                     {s.value}
                   </div>
-                  <div className="mt-1 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-[11px] text-muted-foreground sm:mt-1 sm:text-xs">{s.label}</div>
                 </div>
               );
             })}
@@ -356,27 +354,27 @@ function Index() {
       </section>
 
       {/* ============ TRILHAS ============ */}
-      <section className="relative overflow-hidden py-20 sm:py-28">
+      <section className="relative overflow-hidden py-12 sm:py-20 lg:py-28">
         <div className="absolute inset-0 tech-grid opacity-30" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
                 Trilhas
               </div>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
                 Aprenda o que <span className="text-gradient">move o mercado</span>
               </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
+              <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
                 Trilhas práticas com foco em resultado — automação, IA aplicada, renda e novos negócios.
               </p>
             </div>
-            <SecondaryCTA to="/trilhas" className="h-11 px-5 text-sm">
+            <SecondaryCTA to="/trilhas" className="hidden h-11 px-5 text-sm sm:inline-flex">
               Ver todas <ArrowUpRight className="h-4 w-4" />
             </SecondaryCTA>
           </div>
 
-          <div className="mt-12 -mx-6 overflow-x-auto px-6 pb-4 lg:mx-0 lg:overflow-visible lg:px-0">
+          <div className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
@@ -431,7 +429,7 @@ function Index() {
       </section>
 
       {/* ============ CAPABILITIES — O que você será capaz de fazer ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-12 sm:py-20 lg:py-28">
         <div
           className="absolute left-1/3 top-0 h-[400px] w-[600px] rounded-full bg-primary/10 blur-[140px]"
           aria-hidden
@@ -441,30 +439,30 @@ function Index() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
               Prova de transformação
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl lg:text-[3.5rem]">
               Resultados que você <span className="text-gradient">vai alcançar</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
               Aplicações reais que você desenvolve ao longo das trilhas — não teoria, entrega.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-4">
             {capabilities.map((c) => {
               const Icon = c.icon;
               return (
                 <div
                   key={c.label}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-4 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90 sm:p-6"
                 >
                   <div
                     className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl transition-all group-hover:bg-primary/30"
                     aria-hidden
                   />
-                  <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20">
-                    <Icon className="h-7 w-7" />
+                  <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
                   </span>
-                  <div className="relative mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                  <div className="relative mt-3 font-display text-sm font-semibold leading-snug text-foreground sm:mt-5 sm:text-lg">
                     {c.label}
                   </div>
                 </div>
@@ -475,7 +473,7 @@ function Index() {
       </section>
 
       {/* ============ DEMO — Platform showcase ============ */}
-      <section className="relative overflow-hidden border-b border-white/5 bg-surface/40 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-b border-white/5 bg-surface/40 py-12 sm:py-20 lg:py-28">
         <div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"
           aria-hidden
@@ -485,15 +483,15 @@ function Index() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
               Plataforma
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
               Veja a FCIA Academy <span className="text-gradient">em ação</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Dashboard, player, XP, certificados e ranking — uma experiência completa para aprender e evoluir.
+            <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
+              Dashboard, player, XP, certificados e ranking — experiência completa para evoluir.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <div className="mt-8 -mx-6 flex gap-4 overflow-x-auto px-6 pb-4 sm:mt-14 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0">
             <DemoCard
               icon={Play}
               tag="Player"
@@ -518,33 +516,33 @@ function Index() {
 
 
       {/* ============ INSTRUCTOR ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-24 sm:py-32">
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-12 sm:py-24 lg:py-32">
         <div
           className="absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-accent/15 blur-[140px]"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
-            {/* Visual portrait card — bigger, first on desktop */}
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+            {/* Visual portrait card — compact on mobile */}
             <div className="relative order-2 lg:order-1">
               <div
                 className="absolute -inset-8 rounded-[2rem] bg-gradient-to-br from-primary/35 via-accent/25 to-transparent blur-3xl"
                 aria-hidden
               />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-primary/25 via-card/85 to-accent/25 p-8 backdrop-blur-xl">
-                <div className="flex h-full flex-col justify-between">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-primary/25 via-card/85 to-accent/25 p-5 backdrop-blur-xl sm:p-8 lg:aspect-[4/5]">
+                <div className="flex h-full flex-col items-center gap-4 text-center sm:gap-6 lg:justify-between lg:text-left">
+                  <div className="hidden items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground lg:flex">
                     <Sparkles className="h-3.5 w-3.5 text-primary" />
                     Fundador · CEO
                   </div>
-                  <div className="flex h-60 w-60 items-center justify-center self-center rounded-full bg-gradient-to-br from-primary to-accent text-8xl font-display font-bold text-primary-foreground ring-glow">
+                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-5xl font-display font-bold text-primary-foreground ring-glow sm:h-40 sm:w-40 sm:text-6xl lg:h-60 lg:w-60 lg:text-8xl lg:self-center">
                     FC
                   </div>
                   <div>
-                    <div className="font-display text-2xl font-semibold leading-snug">
+                    <div className="font-display text-base font-semibold leading-snug sm:text-xl lg:text-2xl">
                       "Tecnologia muda a vida de quem aprende a aplicar."
                     </div>
-                    <div className="mt-2 text-sm text-muted-foreground">— Fernando Cabral</div>
+                    <div className="mt-2 text-xs text-muted-foreground sm:text-sm">— Fernando Cabral</div>
                   </div>
                 </div>
               </div>
@@ -554,23 +552,23 @@ function Index() {
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
                 Por que aprender comigo?
               </div>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
                 Fernando Cabral
               </h2>
-              <p className="mt-2 text-lg text-gradient font-medium">
+              <p className="mt-1 text-base text-gradient font-medium sm:mt-2 sm:text-lg">
                 Especialista em IA, SaaS e Educação Tecnológica
               </p>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-base">
                 Mais de uma década construindo produtos digitais, automações e estratégias com IA.
                 Mentor de centenas de profissionais e fundador da FCIA Academy.
               </p>
 
               {/* Reasons block */}
-              <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
-                <div className="font-display text-base font-semibold">
-                  Por que aprender com Fernando Cabral?
+              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur sm:mt-8 sm:p-6">
+                <div className="font-display text-sm font-semibold sm:text-base">
+                  Autoridades em
                 </div>
-                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                <ul className="mt-3 grid gap-2 sm:mt-4 sm:gap-2.5 sm:grid-cols-2">
                   {instructorReasons.map((r) => (
                     <li key={r} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -580,13 +578,13 @@ function Index() {
                 </ul>
               </div>
 
-              <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+              <div className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:mt-8">
                 {instructorMetrics.map((m) => (
-                  <div key={m.label} className="bg-background/50 p-5">
-                    <div className="font-display text-2xl font-semibold text-gradient">
+                  <div key={m.label} className="bg-background/50 p-3 sm:p-5">
+                    <div className="font-display text-xl font-semibold text-gradient sm:text-2xl">
                       {m.value}
                     </div>
-                    <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                    <div className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground sm:mt-1 sm:text-[11px]">
                       {m.label}
                     </div>
                   </div>
@@ -601,7 +599,7 @@ function Index() {
       <FAQ />
 
       {/* ============ FINAL CTA ============ */}
-      <section className="relative overflow-hidden py-24 sm:py-32">
+      <section className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
         <div className="absolute inset-0 tech-grid opacity-40" aria-hidden />
         <div
           className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[160px] animate-pulse-glow"
@@ -618,20 +616,20 @@ function Index() {
             O futuro chegou — escolha seu lado
           </div>
 
-          <h2 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h2 className="mt-4 font-display text-3xl font-semibold leading-[1.08] tracking-tight sm:mt-6 sm:text-6xl lg:text-7xl">
             O mercado está mudando.
             <br />
             <span className="text-gradient">Você vai acompanhar ou liderar?</span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:mt-6 sm:text-lg">
             Comece gratuitamente e desenvolva habilidades que já estão transformando empresas,
             profissionais e negócios.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <PrimaryCTA to="/inscricao">Começar gratuitamente</PrimaryCTA>
-            <SecondaryCTA to="/trilhas">Explorar trilhas</SecondaryCTA>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+            <PrimaryCTA to="/inscricao" className="h-12 w-full sm:h-12 sm:w-auto">Começar gratuitamente</PrimaryCTA>
+            <SecondaryCTA to="/trilhas" className="hidden sm:inline-flex">Explorar trilhas</SecondaryCTA>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
@@ -680,7 +678,7 @@ function DemoCard({
   desc: string;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40">
+    <div className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/40 lg:w-auto lg:shrink">
       <div
         className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-accent/20 blur-3xl transition-all group-hover:bg-primary/30"
         aria-hidden

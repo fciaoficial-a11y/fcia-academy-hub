@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/site/SiteHeader";
 import { SiteFooter } from "../components/site/SiteFooter";
+import { MobileStickyCTA } from "../components/site/MobileStickyCTA";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -127,6 +128,7 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 const AUTH_ROUTES = ["/login", "/register", "/forgot-password", "/reset-password"];
+const HIDE_STICKY_PREFIXES = ["/inscricao", "/login", "/register", "/forgot-password", "/reset-password", "/dashboard", "/profile", "/admin", "/settings", "/quiz"];
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -136,6 +138,7 @@ function RootComponent() {
     AUTH_ROUTES.includes(pathname) ||
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/profile");
+  const hideStickyCTA = HIDE_STICKY_PREFIXES.some((p) => pathname.startsWith(p));
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
@@ -154,7 +157,9 @@ function RootComponent() {
           <Outlet />
         </main>
         {!hideChrome && <SiteFooter />}
+        {!hideChrome && !hideStickyCTA && <div aria-hidden className="h-20 lg:hidden" />}
       </div>
+      {!hideChrome && !hideStickyCTA && <MobileStickyCTA />}
       <Toaster />
     </QueryClientProvider>
   );
