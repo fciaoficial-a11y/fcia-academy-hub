@@ -354,27 +354,27 @@ function Index() {
       </section>
 
       {/* ============ TRILHAS ============ */}
-      <section className="relative overflow-hidden py-20 sm:py-28">
+      <section className="relative overflow-hidden py-12 sm:py-20 lg:py-28">
         <div className="absolute inset-0 tech-grid opacity-30" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
                 Trilhas
               </div>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl">
                 Aprenda o que <span className="text-gradient">move o mercado</span>
               </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
+              <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
                 Trilhas práticas com foco em resultado — automação, IA aplicada, renda e novos negócios.
               </p>
             </div>
-            <SecondaryCTA to="/trilhas" className="h-11 px-5 text-sm">
+            <SecondaryCTA to="/trilhas" className="hidden h-11 px-5 text-sm sm:inline-flex">
               Ver todas <ArrowUpRight className="h-4 w-4" />
             </SecondaryCTA>
           </div>
 
-          <div className="mt-12 -mx-6 overflow-x-auto px-6 pb-4 lg:mx-0 lg:overflow-visible lg:px-0">
+          <div className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
