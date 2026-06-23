@@ -45,10 +45,10 @@ export function FAQ({
     <Section className="border-b border-border">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
         <SectionHeading eyebrow={eyebrow} title={title} description={description} />
-        <Accordion type="single" collapsible className="w-full divide-y divide-border rounded-2xl border border-border bg-background px-5 sm:px-7">
+        <Accordion type="single" collapsible defaultValue="item-0" className="w-full divide-y divide-border rounded-2xl border border-border bg-background px-4 sm:px-7">
           {items.map((it, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="border-0">
-              <AccordionTrigger className="py-5 text-left text-base font-medium hover:no-underline sm:text-lg">
+              <AccordionTrigger className="min-h-14 py-5 text-left text-base font-medium hover:no-underline sm:text-lg">
                 {it.q}
               </AccordionTrigger>
               <AccordionContent className="pb-5 pt-0 text-sm leading-relaxed text-muted-foreground sm:text-base">
