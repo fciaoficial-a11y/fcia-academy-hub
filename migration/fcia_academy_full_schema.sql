@@ -233,16 +233,8 @@ CREATE POLICY "Users update own avatar" ON storage.objects
 
 CREATE POLICY "Users delete own avatar" ON storage.objects
   FOR DELETE TO authenticated
-  USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
+  USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);-- [DML removido] -- ============== SEED ==============
 
--- ============== SEED ==============
-INSERT INTO public.tracks (slug, title, description, tag, level, hours, modules, icon, outcomes, sort_order) VALUES
-('ia-aplicada', 'IA Aplicada ao Trabalho', 'Domine ChatGPT, agentes, automações e prompts avançados para produtividade real.', 'Inteligência Artificial', 'Iniciante → Avançado', '42h', 8, 'Bot', ARRAY['Construir agentes de IA para sua rotina','Automatizar fluxos repetitivos com n8n e Zapier','Aplicar prompts avançados em qualquer área'], 1),
-('dev-moderno', 'Desenvolvimento Moderno', 'Construa produtos digitais com as stacks mais valorizadas e ship rápido.', 'Tecnologia', 'Do zero ao profissional', '120h', 14, 'Code2', ARRAY['Publicar produtos full-stack com React e TypeScript','Trabalhar com APIs, banco de dados e deploy','Montar portfólio pronto para o mercado'], 2),
-('empreendedorismo', 'Empreendedorismo Digital', 'Valide, lance e escale um negócio digital com IA, automações e aquisição moderna.', 'Negócios', 'Prática guiada', '36h', 7, 'Rocket', ARRAY['Validar uma oferta em menos de 30 dias','Estruturar funil, marca e operação','Aplicar IA em vendas, marketing e produto'], 3),
-('renda-com-ia', 'Renda com IA e Freelas', 'Monte serviços, ofertas e produtos digitais usando IA para gerar renda real.', 'Renda', 'Aplicação imediata', '28h', 6, 'DollarSign', ARRAY['Lançar 3 ofertas usando IA','Conquistar os primeiros clientes pagantes','Estruturar entrega e precificação'], 4),
-('profissional-do-futuro', 'Profissional do Futuro', 'Reposicione sua carreira com dados, IA e as habilidades mais demandadas.', 'Carreira', 'Trilha guiada', '54h', 9, 'TrendingUp', ARRAY['Reescrever seu posicionamento profissional','Dominar ferramentas de dados e IA','Conquistar entrevistas em vagas seniores'], 5),
-('inovacao', 'Mentalidade de Inovação', 'Pense como produto, decida com dados e aplique frameworks para resolver problemas reais.', 'Inovação', 'Para líderes e times', '24h', 5, 'Brain', ARRAY['Liderar squads com mentalidade de produto','Aplicar discovery e métricas de impacto','Tomar decisões orientadas a dados'], 6);
 
 -- Courses seed (3 per track)
 WITH t AS (SELECT id, slug FROM public.tracks)
@@ -408,38 +400,10 @@ CREATE POLICY "Users view own attempts"
 
 CREATE POLICY "Users insert own attempts"
   ON public.quiz_attempts FOR INSERT TO authenticated
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (auth.uid() = user_id);-- [DML removido] -- Seed sample questions for each existing module
+-- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer
+-- [DML removido] INSERT INTO public.questions (module_id, question, type, options, correct_answer
 
--- Seed sample questions for each existing module
-INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanation, sort_order)
-SELECT m.id,
-       'Qual é o principal objetivo do módulo "' || m.title || '"?',
-       'multiple_choice',
-       '["Apresentar conceitos fundamentais","Vender um produto","Distrair o aluno","Nenhuma das opções"]'::jsonb,
-       'Apresentar conceitos fundamentais',
-       'Cada módulo introduz e aprofunda conceitos essenciais para a sua trilha de aprendizado.',
-       1
-FROM public.modules m;
-
-INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanation, sort_order)
-SELECT m.id,
-       'A prática constante acelera o aprendizado.',
-       'true_false',
-       '["Verdadeiro","Falso"]'::jsonb,
-       'Verdadeiro',
-       'A repetição e prática deliberada são pilares do aprendizado efetivo.',
-       2
-FROM public.modules m;
-
-INSERT INTO public.questions (module_id, question, type, options, correct_answer, explanation, sort_order)
-SELECT m.id,
-       'Qual atitude favorece a conclusão de um curso online?',
-       'multiple_choice',
-       '["Estudar com regularidade","Pular todos os módulos","Ignorar exercícios","Não revisar o conteúdo"]'::jsonb,
-       'Estudar com regularidade',
-       'Constância na rotina de estudos é o fator mais relevante para a conclusão.',
-       3
-FROM public.modules m;
 
 
 -- ============================================================
@@ -516,14 +480,8 @@ AS $$
   LIMIT 1;
 $$;
 
-GRANT EXECUTE ON FUNCTION public.validate_certificate(TEXT) TO anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.validate_certificate(TEXT) TO anon, authenticated;-- [DML removido] -- Backfill: emit certificates for users who already passed quizzes
 
--- Backfill: emit certificates for users who already passed quizzes
-INSERT INTO public.certificates (user_id, course_id)
-SELECT DISTINCT qa.user_id, qa.course_id
-FROM public.quiz_attempts qa
-WHERE qa.passed = true AND qa.course_id IS NOT NULL
-ON CONFLICT (user_id, course_id) DO NOTHING;
 
 
 -- ============================================================
@@ -756,16 +714,8 @@ BEGIN
   RETURN QUERY SELECT v_awarded, v_streak, (SELECT xp FROM public.profiles WHERE id = v_user);
 END;
 $$;
-GRANT EXECUTE ON FUNCTION public.register_daily_login() TO authenticated;
+GRANT EXECUTE ON FUNCTION public.register_daily_login() TO authenticated;-- [DML removido] -- Seed achievements
 
--- Seed achievements
-INSERT INTO public.achievements (code, title, description, icon, xp_reward, sort_order) VALUES
-  ('first_step', 'Primeiro Passo', 'Conclua seu primeiro módulo.', 'Footprints', 25, 1),
-  ('full_week', 'Semana Cheia', 'Mantenha um streak de 7 dias consecutivos.', 'Flame', 75, 2),
-  ('perfectionist', 'Perfeccionista', 'Acerte 100% em um quiz.', 'Target', 50, 3),
-  ('trailblazer', 'Trilheiro', 'Conclua 3 cursos.', 'Mountain', 150, 4),
-  ('master_fcia', 'Mestre FCIA', 'Alcance 2500 XP.', 'Crown', 250, 5)
-ON CONFLICT (code) DO NOTHING;
 
 
 -- ============================================================
@@ -947,15 +897,8 @@ CREATE TRIGGER trg_subs_updated BEFORE UPDATE ON public.subscriptions
 
 -- Mark tracks with required plan tier
 ALTER TABLE public.tracks ADD COLUMN IF NOT EXISTS required_plan TEXT NOT NULL DEFAULT 'free'
-  CHECK (required_plan IN ('free','starter','pro','expert'));
+  CHECK (required_plan IN ('free','starter','pro','expert'));-- [DML removido] -- Seed plans
 
--- Seed plans
-INSERT INTO public.plans (id, name, price, features, sort_order) VALUES
-  ('free','Free',0,'["Cursos gratuitos","Acesso ao dashboard","Gamificação básica"]'::jsonb,1),
-  ('starter','Starter',29.90,'["Tudo do Free","1 trilha premium","Certificados ilimitados"]'::jsonb,2),
-  ('pro','Pro',79.90,'["Tudo do Starter","Todas as trilhas premium","Suporte prioritário"]'::jsonb,3),
-  ('expert','Expert',149.90,'["Tudo do Pro","Recursos exclusivos","Mentoria mensal","Conteúdos avançados"]'::jsonb,4)
-ON CONFLICT (id) DO NOTHING;
 
 -- Helper: get current plan id for a user
 CREATE OR REPLACE FUNCTION public.current_plan(_user UUID)
@@ -1016,12 +959,8 @@ $$;
 DROP TRIGGER IF EXISTS on_auth_user_assign_free_plan ON auth.users;
 CREATE TRIGGER on_auth_user_assign_free_plan
 AFTER INSERT ON auth.users
-FOR EACH ROW EXECUTE FUNCTION public.assign_free_plan();
+FOR EACH ROW EXECUTE FUNCTION public.assign_free_plan();-- [DML removido] -- Backfill: existing users get free plan
 
--- Backfill: existing users get free plan
-INSERT INTO public.subscriptions (user_id, plan_id, status)
-SELECT id, 'free', 'active' FROM auth.users
-ON CONFLICT DO NOTHING;
 
 
 -- ============================================================
@@ -1070,19 +1009,12 @@ $$;
 DROP TRIGGER IF EXISTS on_auth_user_created_promote_admin ON auth.users;
 CREATE TRIGGER on_auth_user_created_promote_admin
   AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE FUNCTION public.auto_promote_admin();
+  FOR EACH ROW EXECUTE FUNCTION public.auto_promote_admin();-- [DML removido] INSERT INTO public.user_roles (user_id, role)
+-- [DML removido] -- 2) Seed demo data (idempotent: wipe demo slugs first)
+-- [DML removido] DELETE FROM public.modules WHERE course_id IN (SELECT id FROM public.courses WHE
+-- [DML removido] DELETE FROM public.courses WHERE slug = 'curso-demo-e2e';
+-- [DML removido] DELETE FROM public.tracks WHERE slug = 'trilha-demo-e2e';
 
-INSERT INTO public.user_roles (user_id, role)
-SELECT id, 'admin'::app_role FROM auth.users WHERE lower(email) = 'blindadoemotivado@gmail.com'
-ON CONFLICT DO NOTHING;
-
--- 2) Seed demo data (idempotent: wipe demo slugs first)
-DELETE FROM public.questions WHERE module_id IN (
-  SELECT m.id FROM public.modules m JOIN public.courses c ON c.id = m.course_id WHERE c.slug = 'curso-demo-e2e'
-);
-DELETE FROM public.modules WHERE course_id IN (SELECT id FROM public.courses WHERE slug = 'curso-demo-e2e');
-DELETE FROM public.courses WHERE slug = 'curso-demo-e2e';
-DELETE FROM public.tracks WHERE slug = 'trilha-demo-e2e';
 
 DO $seed$
 DECLARE
