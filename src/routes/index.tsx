@@ -429,7 +429,7 @@ function Index() {
       </section>
 
       {/* ============ CAPABILITIES — O que você será capaz de fazer ============ */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-y border-white/5 bg-surface/30 py-12 sm:py-20 lg:py-28">
         <div
           className="absolute left-1/3 top-0 h-[400px] w-[600px] rounded-full bg-primary/10 blur-[140px]"
           aria-hidden
@@ -439,30 +439,30 @@ function Index() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
               Prova de transformação
             </div>
-            <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-5xl lg:text-[3.5rem]">
               Resultados que você <span className="text-gradient">vai alcançar</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground sm:mt-4 sm:text-lg">
               Aplicações reais que você desenvolve ao longo das trilhas — não teoria, entrega.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-4">
             {capabilities.map((c) => {
               const Icon = c.icon;
               return (
                 <div
                   key={c.label}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/70 p-4 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/50 hover:bg-card/90 sm:p-6"
                 >
                   <div
                     className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl transition-all group-hover:bg-primary/30"
                     aria-hidden
                   />
-                  <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20">
-                    <Icon className="h-7 w-7" />
+                  <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground ring-1 ring-primary/40 shadow-lg shadow-primary/20 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
                   </span>
-                  <div className="relative mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                  <div className="relative mt-3 font-display text-sm font-semibold leading-snug text-foreground sm:mt-5 sm:text-lg">
                     {c.label}
                   </div>
                 </div>
