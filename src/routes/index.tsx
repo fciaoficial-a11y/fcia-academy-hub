@@ -412,7 +412,7 @@ function Index() {
             </SecondaryCTA>
           </div>
 
-          <div className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
+          <div ref={tracksScrollerRef} className="mt-6 -mx-6 overflow-x-auto px-6 pb-4 sm:mt-12 lg:mx-0 lg:overflow-visible lg:px-0">
             <div className="flex gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
               {tracks.map((t) => {
                 const Icon = t.icon;
